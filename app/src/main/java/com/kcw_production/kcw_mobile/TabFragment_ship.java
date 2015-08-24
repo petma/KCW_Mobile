@@ -13,9 +13,9 @@ import android.view.ViewGroup;
 /**
  * Created by airfr on 2015/8/24.
  */
-public class TabFragment_2 extends Fragment {
+public class TabFragment_ship extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
-        return inflater.inflate(R.layout.tab_fragment_2,container,false);
+        return inflater.inflate(R.layout.tab_fragment_ship,container,false);
     }
 }

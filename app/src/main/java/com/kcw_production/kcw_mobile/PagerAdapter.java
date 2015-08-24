@@ -21,19 +21,19 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                TabFragment_1 tab1 = new TabFragment_1();
+                TabFragment_attact tab1 = new TabFragment_attact();
                 return tab1;
             case 1:
-                TabFragment_2 tab2 = new TabFragment_2();
+                TabFragment_expedition tab2 = new TabFragment_expedition();
                 return tab2;
             case 2:
-                TabFragment_3 tab3 = new TabFragment_3();
+                TabFragment_ship tab3 = new TabFragment_ship();
                 return tab3;
             case 3:
-                TabFragment_4 tab4 = new TabFragment_4();
+                TabFragment_equipment tab4 = new TabFragment_equipment();
                 return tab4;
             case 4:
-                TabFragment_5 tab5 = new TabFragment_5();
+                TabFragment_mission tab5 = new TabFragment_mission();
                 return tab5;
             default:
                 return null;
