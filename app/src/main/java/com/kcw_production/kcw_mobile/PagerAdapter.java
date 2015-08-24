@@ -21,7 +21,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                TabFragment_attact tab1 = new TabFragment_attact();
+                TabFragment_attack tab1 = new TabFragment_attack();
                 return tab1;
             case 1:
                 TabFragment_expedition tab2 = new TabFragment_expedition();
