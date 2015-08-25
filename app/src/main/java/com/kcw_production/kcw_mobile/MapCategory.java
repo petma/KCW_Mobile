@@ -14,6 +14,7 @@ public class MapCategory {
 
     public MapCategory(String categoryName) {
         this.categoryName = categoryName;
+        this.categoryItems = new ArrayList<>();
     }
 
     public String getCategoryName() {
