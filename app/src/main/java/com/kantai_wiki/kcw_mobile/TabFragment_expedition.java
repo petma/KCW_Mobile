@@ -1,4 +1,4 @@
-package com.kcw_production.kcw_mobile;
+package com.kantai_wiki.kcw_mobile;
 
 /**
  * Created by airfr on 2015/8/25.
@@ -13,9 +13,9 @@ import android.view.ViewGroup;
 /**
  * Created by airfr on 2015/8/24.
  */
-public class TabFragment_mission extends Fragment {
+public class TabFragment_expedition extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
-        return inflater.inflate(R.layout.tab_fragment_mission,container,false);
+        return inflater.inflate(R.layout.tab_fragment_expedition,container,false);
     }
 }
