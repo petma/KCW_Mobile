@@ -164,4 +164,26 @@ public class MapCategoryAdapter extends BaseAdapter{
 
         return convertView;
     }
+
+    @Override
+    public boolean areAllItemsEnabled() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled(int position) {
+
+        boolean flag = false;
+
+        switch (getItemViewType(position)) {
+            case TYPE_CATEGORY_ITEM:
+                flag = false;
+                break;
+            case TYPE_ITEM:
+                flag = true;
+                break;
+        }
+
+        return flag;
+    }
 }

@@ -8,7 +8,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -56,13 +58,25 @@ public class TabFragment_attack extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
 
         //Data
-        ArrayList<MapCategory> listData = getData();
+        final ArrayList<MapCategory> listData = getData();
         adapter = new MapCategoryAdapter(getActivity(),listData);
 
         //View
         View v = inflater.inflate(R.layout.tab_fragment_attack, container, false);
         listView = (ListView)v.findViewById(R.id.attack_map_list);
         listView.setAdapter(adapter);
+
+        //Click Event
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                String map = (String)adapter.getItem(position);
+                Toast.makeText(getActivity(),"You clicked " + map,Toast.LENGTH_SHORT).show();
+
+                //// TODO: 2015/8/25 Start new activity to display attack map info
+            }
+        });
 
         return v;
     }
