@@ -5,7 +5,7 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        applicationId "com.kcw_production.kcw_mobile"
+        applicationId "com.kantai_wiki.kcw_mobile"
         minSdkVersion 22
         targetSdkVersion 22
         versionCode 1

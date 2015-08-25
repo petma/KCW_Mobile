@@ -1,4 +1,4 @@
-package com.kcw_production.kcw_mobile;
+package com.kantai_wiki.kcw_mobile;
 
 /**
  * Created by airfr on 2015/8/25.
