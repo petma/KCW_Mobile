@@ -1,4 +1,4 @@
-package com.kcw_production.kcw_mobile;
+package com.kantai_wiki.kcw_mobile;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
