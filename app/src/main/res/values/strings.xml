@@ -10,7 +10,13 @@
 
     <string name="TabFragment_1">出击</string>
     <string name="TabFragment_2">远征</string>
+    <!--舰船-->
     <string name="TabFragment_3">舰船</string>
+    <string name="TabFragment_3_1_SwitchOn">敌方舰船</string>
+    <string name="TabFragment_3_1_SwitchOff">我方舰船</string>
+    <string name="TabFragment_3_2_SwitchOn">满级数据</string>
+    <string name="TabFragment_3_2_SwitchOff">初级数据</string>
+
     <string name="TabFragment_4">装备</string>
     <string name="TabFragment_5">任务</string>
 </resources>
