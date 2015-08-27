@@ -1,4 +1,4 @@
-package com.kantai_wiki.kcw_mobile;
+package com.kantai_wiki.kcw_mobile.activity;
 
 /**
  * Created by airfr on 2015/8/25.
@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.kantai_wiki.kcw_mobile.R;
 
 
 /**

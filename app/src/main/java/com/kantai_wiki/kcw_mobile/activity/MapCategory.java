@@ -1,4 +1,4 @@
-package com.kantai_wiki.kcw_mobile;
+package com.kantai_wiki.kcw_mobile.activity;
 
 import java.util.ArrayList;
 

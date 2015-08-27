@@ -1,4 +1,4 @@
-package com.kantai_wiki.kcw_mobile;
+package com.kantai_wiki.kcw_mobile.activity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -21,20 +21,15 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                TabFragment_attack tab1 = new TabFragment_attack();
-                return tab1;
+                return new TabFragment_attack();
             case 1:
-                TabFragment_expedition tab2 = new TabFragment_expedition();
-                return tab2;
+                return new TabFragment_expedition();
             case 2:
-                TabFragment_ship tab3 = new TabFragment_ship();
-                return tab3;
+                return new TabFragment_ship();
             case 3:
-                TabFragment_equipment tab4 = new TabFragment_equipment();
-                return tab4;
+                return new TabFragment_equipment();
             case 4:
-                TabFragment_mission tab5 = new TabFragment_mission();
-                return tab5;
+                return new TabFragment_mission();
             default:
                 return null;
         }

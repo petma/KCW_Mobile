@@ -1,4 +1,4 @@
-package com.kantai_wiki.kcw_mobile;
+package com.kantai_wiki.kcw_mobile.activity;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.kantai_wiki.kcw_mobile.R;
 
 import java.util.ArrayList;
 
