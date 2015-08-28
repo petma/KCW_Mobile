@@ -13,14 +13,15 @@ public class KCWOpenHelper extends SQLiteOpenHelper{
         super(context, name, factory, version);
     }
 
+
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL(FeedReaderContract.SQL_CREAT_EQUIPMENTENEMY);
-        db.execSQL(FeedReaderContract.SQL_CREAT_EQUIPMENTKMS);
-        db.execSQL(FeedReaderContract.SQL_CREAT_EQUIPMENTUPGRADE);
-        db.execSQL(FeedReaderContract.SQL_CREAT_EXPEDITION);
-        db.execSQL(FeedReaderContract.SQL_CREAT_QUEST);
+        db.execSQL(FeedReaderContract.SQL_CREATE_EQUIPMENTENEMY);
+        db.execSQL(FeedReaderContract.SQL_CREATE_EQUIPMENTKMS);
+        db.execSQL(FeedReaderContract.SQL_CREATE_EQUIPMENTUPGRADE);
+        db.execSQL(FeedReaderContract.SQL_CREATE_EXPEDITION);
+        db.execSQL(FeedReaderContract.SQL_CREATE_QUEST);
 
     }
 

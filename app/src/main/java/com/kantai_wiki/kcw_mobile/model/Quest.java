@@ -1,5 +1,7 @@
 package com.kantai_wiki.kcw_mobile.model;
 
+import java.util.Objects;
+
 /**
  * Created by Wafer on 2015/8/29.
  */

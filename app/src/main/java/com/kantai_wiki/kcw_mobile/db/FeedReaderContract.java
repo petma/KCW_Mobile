@@ -133,7 +133,7 @@ public final class FeedReaderContract {
     //SQL Command
 
     //Equipment_upgrade
-    public static final String SQL_CREAT_EQUIPMENTUPGRADE = "create table " + EquipmentUpgrade.TABLE_NAME + " (" +
+    public static final String SQL_CREATE_EQUIPMENTUPGRADE = "create table " + EquipmentUpgrade.TABLE_NAME + " (" +
             EquipmentUpgrade._ID + " integer primary key autoincrement" + COMMA_SET +
             EquipmentUpgrade.COLUMN_CATEGORY + TYPE_TEXT + COMMA_SET +
             EquipmentUpgrade.COLUMN_POSITION + TYPE_TEXT + COMMA_SET +
@@ -156,7 +156,7 @@ public final class FeedReaderContract {
             "drop table if exists " + EquipmentUpgrade.TABLE_NAME;
 
     //Equipment_enemy
-    public static final String SQL_CREAT_EQUIPMENTENEMY = "create table " + EquipmentEnemy.TABLE_NAME + " (" +
+    public static final String SQL_CREATE_EQUIPMENTENEMY = "create table " + EquipmentEnemy.TABLE_NAME + " (" +
             EquipmentEnemy._ID + " integer primary key autoincrement" + COMMA_SET +
             EquipmentEnemy.COLUMN_NAME + TYPE_TEXT + COMMA_SET +
             EquipmentEnemy.COLUMN_CATEGORY + TYPE_TEXT + COMMA_SET +
@@ -176,7 +176,7 @@ public final class FeedReaderContract {
             "drop table if exists " + EquipmentEnemy.TABLE_NAME;
 
     //EquipmentKMS
-    public static final String SQL_CREAT_EQUIPMENTKMS = "create table " + EquipmentKMS.TABLE_NAME + " (" +
+    public static final String SQL_CREATE_EQUIPMENTKMS = "create table " + EquipmentKMS.TABLE_NAME + " (" +
             EquipmentKMS._ID + " integer primary key autoincrement" + COMMA_SET +
             EquipmentKMS.COLUMN_ID + TYPE_INTEGER + COMMA_SET +
             EquipmentKMS.COLUMN_RARE_RATE + TYPE_TEXT + COMMA_SET +
@@ -198,7 +198,7 @@ public final class FeedReaderContract {
             "drop table if exists " + EquipmentKMS.TABLE_NAME;
 
     //Quest
-    public static final String SQL_CREAT_QUEST = "create table " + Quest.TABLE_NAME + " (" +
+    public static final String SQL_CREATE_QUEST = "create table " + Quest.TABLE_NAME + " (" +
             Quest._ID + " integer primary key autoincrement" + COMMA_SET +
             Quest.COLUMN_CATEGORY + TYPE_TEXT + COMMA_SET +
             Quest.COLUMN_TYPE + TYPE_TEXT + COMMA_SET +
@@ -218,7 +218,7 @@ public final class FeedReaderContract {
             "drop table if exists " + Quest.TABLE_NAME;
 
     //Expedition
-    public static final String SQL_CREAT_EXPEDITION = "create table " + Expedition.TABLE_NAME + " (" +
+    public static final String SQL_CREATE_EXPEDITION = "create table " + Expedition.TABLE_NAME + " (" +
             Expedition._ID + " integer primary key autoincrement" + COMMA_SET +
             Expedition.COLUMN_ID + TYPE_INTEGER + COMMA_SET +
             Expedition.COLUMN_NAME + TYPE_TEXT + COMMA_SET +
