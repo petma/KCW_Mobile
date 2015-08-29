@@ -130,6 +130,14 @@ public final class FeedReaderContract {
         public static final String COLUMN_UPGRADE_RESULT_INVENTABLE = "upgrade_result_inventeable";
     }
 
+
+    //TABLE NAME
+    public static final String TABLE_EXPEDITION = Expedition.TABLE_NAME;
+    public static final String TABLE_EQUIPMENTKMS = EquipmentKMS.TABLE_NAME;
+    public static final String TABLE_EQUIPMENTENEMY = EquipmentEnemy.TABLE_NAME;
+    public static final String TABLE_EQUIPMENTUPGRADE = EquipmentUpgrade.TABLE_NAME;
+    public static final String TABLE_QUEST = Quest.TABLE_NAME;
+
     //SQL Command
 
     //Equipment_upgrade

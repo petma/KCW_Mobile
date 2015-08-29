@@ -27,6 +27,23 @@ public class Expedition {
 
     //getter and setter
 
+
+    public String getTeitoku_exp() {
+        return teitoku_exp;
+    }
+
+    public void setTeitoku_exp(String teitoku_exp) {
+        this.teitoku_exp = teitoku_exp;
+    }
+
+    public String getKanmusu_exp() {
+        return kanmusu_exp;
+    }
+
+    public void setKanmusu_exp(String kanmusu_exp) {
+        this.kanmusu_exp = kanmusu_exp;
+    }
+
     //#id
     public int getId() {
         return id;
