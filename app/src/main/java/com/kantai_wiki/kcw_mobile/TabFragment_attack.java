@@ -3,7 +3,10 @@ package com.kantai_wiki.kcw_mobile;
 /**
  * Created by airfr on 2015/8/25.
  */
+import android.content.ContentUris;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.net.ContentHandler;
 import java.util.ArrayList;
 
 
@@ -53,7 +57,7 @@ public class TabFragment_attack extends Fragment {
 
     ListView listView;
     MapCategoryAdapter adapter;
-
+    FloatingActionButton btnFab;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
 
@@ -65,21 +69,36 @@ public class TabFragment_attack extends Fragment {
         View v = inflater.inflate(R.layout.tab_fragment_attack, container, false);
         listView = (ListView)v.findViewById(R.id.attack_map_list);
         listView.setAdapter(adapter);
-
+        btnFab = (FloatingActionButton) v.findViewById(R.id.fba_attack);
         //Click Event
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                String map = (String)adapter.getItem(position);
-                Toast.makeText(getActivity(),"You clicked " + map,Toast.LENGTH_SHORT).show();
+                String map = (String) adapter.getItem(position);
+                Toast.makeText(getActivity(), "You clicked " + map, Toast.LENGTH_SHORT).show();
 
                 //// TODO: 2015/8/25 Start new activity to display attack map info
+            }
+        });
+        btnFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(/*v.getRootView()*//*getView()*//*atkCoordinator*/v.getRootView().findViewById(R.id.attack_coord), "So this is a Snackbar!", Snackbar.LENGTH_LONG)
+                        .setAction("Toast", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(getActivity(),"So this is a Toast!",Toast.LENGTH_LONG)
+                                        .show();
+                            }
+                        })
+                        .show();
             }
         });
 
         return v;
     }
+
 
 
 }
