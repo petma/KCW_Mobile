@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 /**
@@ -30,7 +31,13 @@ public  class TabFragment_ship extends Fragment{
         shipRecyclerView = (RecyclerView) v.findViewById(R.id.ship_map_list);
         shipRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         shipRecyclerView.setAdapter(shipAdapter);
+        //OnItemClick
+        shipAdapter.setOnItemClickListener(new ShipAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClickListener(View view, int position) {
+                Toast.makeText(getActivity(), position + "", Toast.LENGTH_SHORT).show();
+            }
+        });
         return v;
     }
-
 }

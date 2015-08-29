@@ -18,8 +18,19 @@ public class ShipAdapter extends RecyclerView.Adapter<ShipAdapter.ShipViewHolder
     private List<String> shipData;
     private LayoutInflater inflater;
 
+    //Constructor
     public ShipAdapter(Context context) {
         inflater = LayoutInflater.from(context);
+    }
+
+    //The interface for OnItemClick
+    public interface OnItemClickListener {
+        void onItemClickListener(View view, int position);
+    }
+
+    private OnItemClickListener listener;
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     @Override
@@ -36,11 +47,20 @@ public class ShipAdapter extends RecyclerView.Adapter<ShipAdapter.ShipViewHolder
     }
 
     @Override
-    public void onBindViewHolder (ShipViewHolder holder, int position){
+    public void onBindViewHolder (ShipViewHolder holder,final int position) {
         holder.shipItem.setText(shipData.get(position));
+        if (listener != null) {
+            holder.shipItem.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClickListener(v, position);
+                }
+            });
+        }
     }
 
-    class ShipViewHolder extends RecyclerView.ViewHolder {
+    class ShipViewHolder extends RecyclerView.ViewHolder{
 
         TextView shipItem;
 
