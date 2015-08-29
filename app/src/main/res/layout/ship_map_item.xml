@@ -6,6 +6,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:textSize="25sp"
         android:id="@+id/ship_map_list_item"/>
 
 </LinearLayout>

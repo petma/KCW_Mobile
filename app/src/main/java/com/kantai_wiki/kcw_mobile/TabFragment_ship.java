@@ -3,6 +3,7 @@ package com.kantai_wiki.kcw_mobile;
 /**
  * Created by airfr on 2015/8/25.
  */
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -35,7 +36,10 @@ public  class TabFragment_ship extends Fragment{
         shipAdapter.setOnItemClickListener(new ShipAdapter.OnItemClickListener() {
             @Override
             public void onItemClickListener(View view, int position) {
-                Toast.makeText(getActivity(), position + "", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"You Click " + position, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), ShipInformationActivity.class);
+                intent.putExtra("position", position);
+                startActivity(intent);
             }
         });
         return v;
