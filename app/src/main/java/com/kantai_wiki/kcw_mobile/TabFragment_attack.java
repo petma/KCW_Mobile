@@ -81,17 +81,20 @@ public class TabFragment_attack extends Fragment {
                 //// TODO: 2015/8/25 Start new activity to display attack map info
             }
         });
+        final View mCoord = (View)v.findViewById(R.id.attack_coord);
         btnFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(/*v.getRootView()*//*getView()*//*atkCoordinator*/v.getRootView().findViewById(R.id.attack_coord), "So this is a Snackbar!", Snackbar.LENGTH_LONG)
-                        .setAction("Toast", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Toast.makeText(getActivity(),"So this is a Toast!",Toast.LENGTH_LONG)
-                                        .show();
-                            }
-                        })
+//                v.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+                Snackbar snackbar = Snackbar.make(mCoord, "So this is a Snackbar!", Snackbar.LENGTH_LONG);
+                snackbar.getView().setBackgroundColor(getResources().getColor(R.color.crepusculo_kantai_main_primarydark));
+                snackbar.setAction("Toast", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getActivity(), "So this is a Toast!", Toast.LENGTH_LONG)
+                                .show();
+                    }
+                })
                         .show();
             }
         });

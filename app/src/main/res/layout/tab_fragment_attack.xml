@@ -1,41 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="vertical">-->
+
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/attack_coord"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <android.support.design.widget.CoordinatorLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/attack_coord"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true">
+        android:id="@+id/attack_map_list"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fba_attack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="mini"
+        app:theme="@style/AlertDialog.AppCompat"
+        app:borderWidth="0dp"
+        app:elevation="6dp"
+        app:backgroundTint="@color/crepusculo_kantai_main"
+        app:rippleColor="@android:color/background_dark"
+        android:src="@drawable/abc_ic_clear_mtrl_alpha"
+        android:layout_margin="16dp"
+        app:layout_anchor="@id/attack_coord"
+        app:layout_anchorGravity="bottom|right" />
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fba_attack"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:fabSize="mini"
-                app:theme="@style/AlertDialog.AppCompat"
-                app:borderWidth="0dp"
-                app:rippleColor="@android:color/background_dark"
-                app:elevation="6dp"
-                android:src="@drawable/abc_ic_clear_mtrl_alpha"
-                android:adjustViewBounds="false"
-                app:backgroundTint="@color/crepusculo_kantai_main"
-                android:layout_margin="16dp"
-                android:alpha="20"
-                app:layout_anchor="@id/attack_coord"
-                app:layout_anchorGravity="bottom|right|end"
-                android:verticalScrollbarPosition="right"/>
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/attack_map_list"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true" />
-        </android.support.design.widget.CoordinatorLayout>
+</android.support.design.widget.CoordinatorLayout>
 
-</RelativeLayout>
+<!--</RelativeLayout>-->
