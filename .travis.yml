@@ -3,6 +3,11 @@ android:
   components:
     - build-tools-22.0.1
     - android-22
+    - extra-google-m2repository
+    - extra-android-support
+    - extra-android-m2repository
+  licenses:
+    - '.+'
 
 script:
   - ./gradlew build assembleRelease
