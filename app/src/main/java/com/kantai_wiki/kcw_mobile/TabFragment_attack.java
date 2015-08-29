@@ -80,4 +80,6 @@ public class TabFragment_attack extends Fragment {
 
         return v;
     }
+
+
 }

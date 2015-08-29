@@ -33,7 +33,7 @@
     <item
         android:id="@+id/action_out_share"
         android:icon="@drawable/abc_ic_menu_share_mtrl_alpha"
-        android:title="@string/action_out_search"
+        android:title="@string/action_out_share"
         android:orderInCategory="2"
         app:showAsAction="always" />
 </menu>
