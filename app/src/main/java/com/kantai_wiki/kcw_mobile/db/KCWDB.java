@@ -18,6 +18,7 @@ import java.util.Objects;
 
 /**
  * Created by Wafer on 2015/8/29.
+ *
  */
 public class KCWDB {
 
@@ -319,9 +320,14 @@ public class KCWDB {
 
                 int flag = 0;
                 for (int i = 0;i<s.length();i++) {
-                    if (Character.toString(s.charAt(i) ).equals(",") || i == s.length() - 1) {
+                    if (Character.toString(s.charAt(i) ).equals(",")) {
                         strings.add(s.substring(flag,i));
                         flag = i;
+                    }
+
+                    //border check
+                    if (i == s.length() - 1) {
+                        strings.add(s.substring(flag + 1));
                     }
                 }
                 equipmentKMS.setEquippable(strings);
@@ -514,7 +520,7 @@ public class KCWDB {
     //insert
     private void insertEquipmentUpgrade(EquipmentUpgrade equipmentUpgrade) {
 
-        db.insert(FeedReaderContract.TABLE_EQUIPMENTUPGRADE,null,getEquipmentUpgradeValues(equipmentUpgrade));
+        db.insert(FeedReaderContract.TABLE_EQUIPMENTUPGRADE, null, getEquipmentUpgradeValues(equipmentUpgrade));
     }
 
     //load
@@ -544,9 +550,14 @@ public class KCWDB {
 
                 int flag = 0;
                 for (int i = 0;i<s.length();i++) {
-                    if(Character.toString(s.charAt(i)).equals(",") || i == s.length() - 1) {
+                    if(Character.toString(s.charAt(i)).equals(",") ) {
                         strings.add(s.substring(flag,i));
                         flag = i;
+                    }
+
+                    //border check
+                    if (i == s.length() - 1) {
+                        strings.add(s.substring(flag + 1));
                     }
                 }
                 equipmentUpgrade.setUpgradeable_day(strings);
@@ -557,9 +568,14 @@ public class KCWDB {
 
                 flag = 0;
                 for (int i = 0;i<string.length();i++) {
-                    if (Character.toString(s.charAt(i)).equals(",") || i == string.length() - 1) {
+                    if (Character.toString(s.charAt(i)).equals(",") ) {
                         stringArrayList.add(string.substring(flag,i));
                         flag = i;
+                    }
+
+                    //border check
+                    if (i == s.length() - 1) {
+                        stringArrayList.add(string.substring(flag + 1));
                     }
                 }
                 equipmentUpgrade.setAssistant_ship(stringArrayList);
