@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">KCW_Mobile</string>
-
+    <string name="kcw_app_name">-艦これ- Wiki</string>
     <string name="hello_world">Hello world!</string>
             <string name="action_settings1">我的设置</string>
             <string name="action_settings2">你的设置</string>
