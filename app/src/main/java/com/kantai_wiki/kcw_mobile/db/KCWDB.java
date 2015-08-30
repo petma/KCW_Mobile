@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.kantai_wiki.kcw_mobile.model.EquipmentEnemy;
 import com.kantai_wiki.kcw_mobile.model.EquipmentKMS;
@@ -14,7 +13,6 @@ import com.kantai_wiki.kcw_mobile.model.Quest;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by Wafer on 2015/8/29.
@@ -64,7 +62,7 @@ public class KCWDB {
      */
 
     //getQuestValue
-    public ContentValues getQuestValues(Quest quest) {
+    private ContentValues getQuestValues(Quest quest) {
         ContentValues values = new ContentValues();
         values.put("category", quest.getCategory());
         values.put("type", quest.getType());
@@ -83,7 +81,7 @@ public class KCWDB {
     //insert quest
     private void insertQuest(Quest quest) {
         if (quest != null) {
-            db.insert(FeedReaderContract.TABLE_QUEST, null, getQuestValues(quest));
+            db.insert(DBContract.TABLE_QUEST, null, getQuestValues(quest));
         }
     }
 
@@ -118,7 +116,7 @@ public class KCWDB {
 
     //sync Quest
     public void syncQuest(List<Quest> list) {
-        if(isTableEmpty(FeedReaderContract.TABLE_QUEST)) {
+        if(isTableEmpty(DBContract.TABLE_QUEST)) {
 
             //if the table is empty insert data
             for (Quest quest : list) {
@@ -129,7 +127,7 @@ public class KCWDB {
 
             db.beginTransaction();
             try {
-                db.delete(FeedReaderContract.TABLE_QUEST,null,null);
+                db.delete(DBContract.TABLE_QUEST,null,null);
                 for (Quest quest :list) {
                     insertQuest(quest);
                 }
@@ -177,7 +175,7 @@ public class KCWDB {
     //insert Expedition
     private void insertExpedition(Expedition expedition) {
         if(expedition != null) {
-            db.insert(FeedReaderContract.TABLE_EXPEDITION,null,getExpeditionValue(expedition));
+            db.insert(DBContract.TABLE_EXPEDITION,null,getExpeditionValue(expedition));
         }
     }
 
@@ -185,7 +183,7 @@ public class KCWDB {
     public List<Expedition> loadExpedition() {
         List<Expedition> list = new ArrayList<>();
 
-        Cursor cursor = db.query(FeedReaderContract.TABLE_EXPEDITION,null,null,null,null,null,null);
+        Cursor cursor = db.query(DBContract.TABLE_EXPEDITION,null,null,null,null,null,null);
 
         //query all
         if (cursor.moveToFirst()) {
@@ -218,7 +216,7 @@ public class KCWDB {
 
     //sync Expedition
     public void syncExpedition(List<Expedition> list) {
-        if (isTableEmpty(FeedReaderContract.TABLE_EXPEDITION)) {
+        if (isTableEmpty(DBContract.TABLE_EXPEDITION)) {
 
             for (Expedition expedition : list) {
                 insertExpedition(expedition);
@@ -227,7 +225,7 @@ public class KCWDB {
 
             db.beginTransaction();
             try {
-                db.delete(FeedReaderContract.TABLE_EXPEDITION,null,null);
+                db.delete(DBContract.TABLE_EXPEDITION,null,null);
 
                 for (Expedition expedition : list) {
                     insertExpedition(expedition);
@@ -286,7 +284,7 @@ public class KCWDB {
     private void insertEquipmentKMS (EquipmentKMS equipmentkms) {
 
         if (equipmentkms != null) {
-            db.insert(FeedReaderContract.TABLE_EQUIPMENTKMS,null,getEquipmentKMSValues(equipmentkms));
+            db.insert(DBContract.TABLE_EQUIPMENTKMS,null,getEquipmentKMSValues(equipmentkms));
         }
     }
 
@@ -294,7 +292,7 @@ public class KCWDB {
     public List<EquipmentKMS> loadEquipemntKMS () {
 
         List<EquipmentKMS> list = new ArrayList<>();
-        Cursor cursor = db.query(FeedReaderContract.TABLE_EQUIPMENTKMS,null,null,null,null,null,null);
+        Cursor cursor = db.query(DBContract.TABLE_EQUIPMENTKMS,null,null,null,null,null,null);
 
         //query all
         if (cursor.moveToFirst()) {
@@ -340,8 +338,8 @@ public class KCWDB {
 
 
     //sync
-    public void syncEquipemntKMS (List<EquipmentKMS> list) {
-        if (isTableEmpty(FeedReaderContract.TABLE_EQUIPMENTKMS)) {
+    public void EquipmentKMS (List<EquipmentKMS> list) {
+        if (isTableEmpty(DBContract.TABLE_EQUIPMENTKMS)) {
             for (EquipmentKMS equipmentkms : list) {
                 insertEquipmentKMS(equipmentkms);
             }
@@ -349,7 +347,7 @@ public class KCWDB {
 
             db.beginTransaction();
             try {
-                db.delete(FeedReaderContract.TABLE_EQUIPMENTKMS,null,null);
+                db.delete(DBContract.TABLE_EQUIPMENTKMS,null,null);
 
                 for (EquipmentKMS equipmentkms : list) {
                     insertEquipmentKMS(equipmentkms);
@@ -396,7 +394,7 @@ public class KCWDB {
     private void insertEquipmentEnemy(EquipmentEnemy equipmentEnemy) {
 
         if (equipmentEnemy != null) {
-            db.insert(FeedReaderContract.TABLE_EQUIPMENTENEMY, null, getEquipmentEnemyValues(equipmentEnemy));
+            db.insert(DBContract.TABLE_EQUIPMENTENEMY, null, getEquipmentEnemyValues(equipmentEnemy));
         }
     }
 
@@ -404,7 +402,7 @@ public class KCWDB {
     public List<EquipmentEnemy> loadEquipmentEnemy() {
 
         List<EquipmentEnemy> list = new ArrayList<>();
-        Cursor cursor = db.query(FeedReaderContract.TABLE_EQUIPMENTENEMY,null,null,null,null,null,null);
+        Cursor cursor = db.query(DBContract.TABLE_EQUIPMENTENEMY,null,null,null,null,null,null);
 
         //query all
         if (cursor.moveToFirst()) {
@@ -435,7 +433,7 @@ public class KCWDB {
 
     //sync
     public void syncEquipmentEnemy(List<EquipmentEnemy> list) {
-        if (isTableEmpty(FeedReaderContract.TABLE_EQUIPMENTENEMY)) {
+        if (isTableEmpty(DBContract.TABLE_EQUIPMENTENEMY)) {
             for (EquipmentEnemy equipmentEnemy : list) {
                 insertEquipmentEnemy(equipmentEnemy);
             }
@@ -443,7 +441,7 @@ public class KCWDB {
 
             db.beginTransaction();
             try {
-                db.delete(FeedReaderContract.TABLE_EQUIPMENTENEMY,null,null);
+                db.delete(DBContract.TABLE_EQUIPMENTENEMY,null,null);
 
                 for (EquipmentEnemy equipmentEnemy :list) {
                     insertEquipmentEnemy(equipmentEnemy);
@@ -520,13 +518,13 @@ public class KCWDB {
     //insert
     private void insertEquipmentUpgrade(EquipmentUpgrade equipmentUpgrade) {
 
-        db.insert(FeedReaderContract.TABLE_EQUIPMENTUPGRADE, null, getEquipmentUpgradeValues(equipmentUpgrade));
+        db.insert(DBContract.TABLE_EQUIPMENTUPGRADE, null, getEquipmentUpgradeValues(equipmentUpgrade));
     }
 
     //load
     public List<EquipmentUpgrade> loadEquipmentUpgrade () {
         List<EquipmentUpgrade> list = new ArrayList<>();
-        Cursor cursor = db.query(FeedReaderContract.TABLE_EQUIPMENTUPGRADE,null,null,null,null,null,null);
+        Cursor cursor = db.query(DBContract.TABLE_EQUIPMENTUPGRADE,null,null,null,null,null,null);
 
         //query all
         if (cursor.moveToFirst()) {
@@ -592,7 +590,7 @@ public class KCWDB {
 
     //sync
     public void syncEquipmentUpgrade (List<EquipmentUpgrade> list) {
-        if (isTableEmpty(FeedReaderContract.TABLE_EQUIPMENTUPGRADE)) {
+        if (isTableEmpty(DBContract.TABLE_EQUIPMENTUPGRADE)) {
             for (EquipmentUpgrade equipmentUpgrade :list) {
                 insertEquipmentUpgrade(equipmentUpgrade);
             }
@@ -600,7 +598,7 @@ public class KCWDB {
 
             db.beginTransaction();
             try {
-                db.delete(FeedReaderContract.TABLE_EQUIPMENTUPGRADE,null,null);
+                db.delete(DBContract.TABLE_EQUIPMENTUPGRADE,null,null);
                 for (EquipmentUpgrade equipmentUpgrade: list) {
                     insertEquipmentUpgrade(equipmentUpgrade);
                 }

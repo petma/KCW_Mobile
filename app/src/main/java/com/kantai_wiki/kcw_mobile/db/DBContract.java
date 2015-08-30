@@ -7,10 +7,10 @@ import android.provider.BaseColumns;
  * Created by Wafer on 2015/8/28.
  *
  */
-public final class FeedReaderContract {
+public final class DBContract {
 
     //Prevent the instantiating
-    public FeedReaderContract() { }
+    public DBContract() { }
 
     //Default Strings
     private static final String TYPE_TEXT = " text";

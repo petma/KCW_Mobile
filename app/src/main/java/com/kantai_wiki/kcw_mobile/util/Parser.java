@@ -23,7 +23,7 @@ public class Parser {
      */
 
     //Quest
-    public List<Quest> praseQuest (String jsonString) {
+    public static List<Quest> praseQuest (String jsonString) {
 
         Gson gson = new Gson();
         Type listType = new TypeToken<List<Quest>>(){}.getType();
@@ -32,7 +32,7 @@ public class Parser {
     }
 
     //Expedition
-    public List<Expedition> praseExpedition (String jsonString) {
+    public static List<Expedition> praseExpedition (String jsonString) {
         Gson gson = new Gson();
         Type listType = new  TypeToken<List<Expedition>>(){}.getType();
 
@@ -40,7 +40,7 @@ public class Parser {
     }
 
     //EquipmentKMS
-    public List<EquipmentKMS> parseEquipmentKMS (String jsonString) {
+    public static List<EquipmentKMS> parseEquipmentKMS (String jsonString) {
         Gson gson = new Gson();
         Type listType = new TypeToken<List<EquipmentKMS>>() {}.getType();
 
@@ -48,7 +48,7 @@ public class Parser {
     }
 
     //EquipmentEnemy
-    public List<EquipmentEnemy> parseEquipmentEnemy (String jsonString) {
+    public static List<EquipmentEnemy> parseEquipmentEnemy (String jsonString) {
         Gson gson = new Gson();
         Type listType = new TypeToken<List<EquipmentEnemy>>() {}.getType();
 
@@ -56,7 +56,7 @@ public class Parser {
     }
 
     //EquipmentUpgrade
-    public List<EquipmentUpgrade> parseEquipmentUpgrade (String jsonString) {
+    public static List<EquipmentUpgrade> parseEquipmentUpgrade (String jsonString) {
         Gson gson = new Gson();
         Type listType = new TypeToken<List<EquipmentUpgrade>>() {}.getType();
 

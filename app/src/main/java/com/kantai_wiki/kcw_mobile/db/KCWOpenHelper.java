@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 /**
  * Created by Wafer on 2015/8/29.
+ *
  */
 public class KCWOpenHelper extends SQLiteOpenHelper{
 
@@ -17,11 +18,11 @@ public class KCWOpenHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL(FeedReaderContract.SQL_CREATE_EQUIPMENTENEMY);
-        db.execSQL(FeedReaderContract.SQL_CREATE_EQUIPMENTKMS);
-        db.execSQL(FeedReaderContract.SQL_CREATE_EQUIPMENTUPGRADE);
-        db.execSQL(FeedReaderContract.SQL_CREATE_EXPEDITION);
-        db.execSQL(FeedReaderContract.SQL_CREATE_QUEST);
+        db.execSQL(DBContract.SQL_CREATE_EQUIPMENTENEMY);
+        db.execSQL(DBContract.SQL_CREATE_EQUIPMENTKMS);
+        db.execSQL(DBContract.SQL_CREATE_EQUIPMENTUPGRADE);
+        db.execSQL(DBContract.SQL_CREATE_EXPEDITION);
+        db.execSQL(DBContract.SQL_CREATE_QUEST);
 
     }
 
