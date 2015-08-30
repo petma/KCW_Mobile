@@ -20,9 +20,9 @@ import java.util.List;
  * Created by Wafer on 2015/8/31.
  *
  */
-public class SyncTask extends AsyncTask<String, Void, Boolean>{
+public class SyncTask extends AsyncTask<Void, Void, Boolean>{
 
-    final int taskType;
+    private int taskType;
     public TaskResponse taskResponse = null;
     Context context;
 
@@ -42,10 +42,10 @@ public class SyncTask extends AsyncTask<String, Void, Boolean>{
     }
 
     @Override
-    protected Boolean doInBackground(String... urls) {
+    protected Boolean doInBackground(Void... params) {
         KCWDB kcwdb = KCWDB.getInstance(context);
         try {
-            String response = HTTPUtils.download(urls[0]);
+            String response = HTTPUtils.download(HTTPUtils.getURL(taskType));
             switch (taskType) {
                 case TaskTypeContract.TASK_TYPE_QUEST:
                     List<Quest> questList;
@@ -84,9 +84,14 @@ public class SyncTask extends AsyncTask<String, Void, Boolean>{
         catch (IOException e) {
             taskResponse.processFinish(false, "Connection fail! Please check your connection");
             return false;
-        } catch (IllegalArgumentException e) {
+        }
+        catch (IllegalArgumentException e) {
             taskResponse.processFinish(false, "The task type is illegal");
             Log.d("IllegalArgument", "The task type is illegal");
+            return false;
+        }
+        catch (IllegalAccessException e) {
+            taskResponse.processFinish(false,"DataBase ERROR!");
             return false;
         }
         return true;

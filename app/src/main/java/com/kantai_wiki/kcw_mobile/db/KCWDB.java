@@ -119,8 +119,8 @@ public class KCWDB {
         return list;
     }
 
-    //sync Quest
-    public void syncQuest(List<Quest> list) {
+    //sync
+    public void syncQuest(List<Quest> list) throws IllegalAccessException {
         if(isTableEmpty(DBContract.TABLE_QUEST)) {
 
             //if the table is empty insert data
@@ -139,6 +139,7 @@ public class KCWDB {
                 db.setTransactionSuccessful();
             } catch (Exception e) {
                 e.printStackTrace();
+                throw new IllegalAccessException();
             } finally {
                 db.endTransaction();
             }
@@ -223,8 +224,8 @@ public class KCWDB {
         return list;
     }
 
-    //sync Expedition
-    public void syncExpedition(List<Expedition> list) {
+    //sync
+    public void syncExpedition(List<Expedition> list) throws IllegalAccessException {
         if (isTableEmpty(DBContract.TABLE_EXPEDITION)) {
 
             for (Expedition expedition : list) {
@@ -243,6 +244,7 @@ public class KCWDB {
             }
             catch (Exception e) {
                 e.printStackTrace();
+                throw new IllegalAccessException();
             }
             finally {
                 db.endTransaction();
@@ -352,7 +354,7 @@ public class KCWDB {
 
 
     //sync
-    public void EquipmentKMS (List<EquipmentKMS> list) {
+    public void EquipmentKMS (List<EquipmentKMS> list) throws IllegalAccessException {
         if (isTableEmpty(DBContract.TABLE_EQUIPMENTKMS)) {
             for (EquipmentKMS equipmentkms : list) {
                 insertEquipmentKMS(equipmentkms);
@@ -370,6 +372,7 @@ public class KCWDB {
             }
             catch (Exception e) {
                 e.printStackTrace();
+                throw new IllegalAccessException();
             }
             finally {
                 db.endTransaction();
@@ -451,7 +454,7 @@ public class KCWDB {
     }
 
     //sync
-    public void syncEquipmentEnemy(List<EquipmentEnemy> list) {
+    public void syncEquipmentEnemy(List<EquipmentEnemy> list) throws IllegalAccessException {
         if (isTableEmpty(DBContract.TABLE_EQUIPMENTENEMY)) {
             for (EquipmentEnemy equipmentEnemy : list) {
                 insertEquipmentEnemy(equipmentEnemy);
@@ -470,6 +473,7 @@ public class KCWDB {
             }
             catch (Exception e) {
                 e.printStackTrace();
+                throw new IllegalAccessException();
             }
             finally {
                 db.endTransaction();
@@ -613,7 +617,7 @@ public class KCWDB {
     }
 
     //sync
-    public void syncEquipmentUpgrade (List<EquipmentUpgrade> list) {
+    public void syncEquipmentUpgrade (List<EquipmentUpgrade> list) throws IllegalAccessException {
         if (isTableEmpty(DBContract.TABLE_EQUIPMENTUPGRADE)) {
             for (EquipmentUpgrade equipmentUpgrade :list) {
                 insertEquipmentUpgrade(equipmentUpgrade);
@@ -630,6 +634,7 @@ public class KCWDB {
             }
             catch (Exception e) {
                 e.printStackTrace();
+                throw new IllegalAccessException();
             }
             finally {
                 db.endTransaction();

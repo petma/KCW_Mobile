@@ -4,6 +4,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.kantai_wiki.kcw_mobile.background_task.TaskTypeContract;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,6 +33,28 @@ public class HTTPUtils {
         return flag;
     }
 
+    //getURL
+    public static String getURL(int syncType) {
+
+        String URL_BASE = "https://kirito.me/kancolle/";
+        String SUFFIX = ".json";
+
+        switch (syncType) {
+            case TaskTypeContract.TASK_TYPE_QUEST :
+                return URL_BASE + "quest" + SUFFIX;
+            case TaskTypeContract.TASK_TYPE_EXPEDITION:
+                return URL_BASE + "expedition" + SUFFIX;
+            case TaskTypeContract.TASK_TYPE_EQUIPMENT_KMS:
+                return URL_BASE + "equipment_kms" + SUFFIX;
+            case TaskTypeContract.TASK_TYPE_EQUIPMENT_ENEMY:
+                return URL_BASE + "equipment_enemy" + SUFFIX;
+            case TaskTypeContract.TASK_TYPE_EQUIPMENT_UPGRADE:
+                return URL_BASE + "equipment_upgrade" + SUFFIX;
+            default:
+                break;
+        }
+        return null;
+    }
 
     //download
     public static String download(String address) throws IOException {
