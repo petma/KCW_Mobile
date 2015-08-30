@@ -25,8 +25,17 @@ public class EquipmentUpgrade {
     private String upgrade_result_inventable;
 
 
+
     //getter and setter
 
+
+    public List<String> getAssistant_ship() {
+        return assistant_ship;
+    }
+
+    public void setAssistant_ship(List<String> assistant_ship) {
+        this.assistant_ship = assistant_ship;
+    }
 
     public String getCategory() {
         return category;

@@ -48,7 +48,7 @@ public class KCWDB {
     private boolean isTableEmpty(String TABLE_NAME) {
 
         boolean flag;
-        String quString = "select exists(select 1 from " + TABLE_NAME + ");";
+        String quString = "SELETE COUNT(*) FROM TABLE " + TABLE_NAME;
         Cursor cursor = db.rawQuery(quString, null);
         cursor.moveToFirst();
         flag = cursor.getInt(0) == 0;
@@ -319,7 +319,7 @@ public class KCWDB {
 
                 int flag = 0;
                 for (int i = 0;i<s.length();i++) {
-                    if (Character.toString(s.charAt(i) ).equals(",")) {
+                    if (Character.toString(s.charAt(i) ).equals(",") || i == s.length() - 1) {
                         strings.add(s.substring(flag,i));
                         flag = i;
                     }
@@ -360,7 +360,6 @@ public class KCWDB {
     }
 
 
-    // TODO: 2015/8/30 Finish EquipmentEnemy Utils
 
     /**
      * EquipmentEnemy
@@ -368,11 +367,235 @@ public class KCWDB {
      */
 
     //getContentValues
-    private ContentValues getEquipmentEnemyValues() {
+    private ContentValues getEquipmentEnemyValues(EquipmentEnemy equipmentEnemy) {
         ContentValues values = new ContentValues();
+
+        values.put("name",equipmentEnemy.getName());
+        values.put("category",equipmentEnemy.getCategory());
+        values.put("range",equipmentEnemy.getRange());
+        values.put("value_firepower",equipmentEnemy.getValue_firepower());
+        values.put("value_torpedo",equipmentEnemy.getValue_torpedo());
+        values.put("value_antiaircraft",equipmentEnemy.getValue_antiaircraft());
+        values.put("value_accuracy",equipmentEnemy.getValue_accuracy());
+        values.put("value_tracking",equipmentEnemy.getValue_tracking());
+        values.put("value_explosion",equipmentEnemy.getValue_explosion());
+        values.put("value_antisubmarine",equipmentEnemy.getValue_antisubmarine());
+        values.put("value_evasion",equipmentEnemy.getValue_evasion());
+        values.put("value_armor",equipmentEnemy.getValue_armor());
 
         return values;
     }
 
-    // TODO: 2015/8/30 Add EquipmentUpgrade Utils
+    //insert
+    private void insertEquipmentEnemy(EquipmentEnemy equipmentEnemy) {
+
+        if (equipmentEnemy != null) {
+            db.insert(FeedReaderContract.TABLE_EQUIPMENTENEMY, null, getEquipmentEnemyValues(equipmentEnemy));
+        }
+    }
+
+    //load
+    public List<EquipmentEnemy> loadEquipmentEnemy() {
+
+        List<EquipmentEnemy> list = new ArrayList<>();
+        Cursor cursor = db.query(FeedReaderContract.TABLE_EQUIPMENTENEMY,null,null,null,null,null,null);
+
+        //query all
+        if (cursor.moveToFirst()) {
+
+            do {
+                EquipmentEnemy equipmentEnemy = new EquipmentEnemy();
+
+                equipmentEnemy.setName(cursor.getString(cursor.getColumnIndex("name")));
+                equipmentEnemy.setCategory(cursor.getString(cursor.getColumnIndex("category")));
+                equipmentEnemy.setRange(cursor.getString(cursor.getColumnIndex("range")));
+                equipmentEnemy.setValue_firepower(cursor.getString(cursor.getColumnIndex("value_firepower")));
+                equipmentEnemy.setValue_torpedo(cursor.getString(cursor.getColumnIndex("value_torpedo")));
+                equipmentEnemy.setValue_antiaircraft(cursor.getString(cursor.getColumnIndex("value_antiaircraft")));
+                equipmentEnemy.setValue_accuracy(cursor.getString(cursor.getColumnIndex("value_accuracy")));
+                equipmentEnemy.setValue_tracking(cursor.getString(cursor.getColumnIndex("value_tracking")));
+                equipmentEnemy.setValue_explosion(cursor.getString(cursor.getColumnIndex("value_explosion")));
+                equipmentEnemy.setValue_antisubmarine(cursor.getString(cursor.getColumnIndex("value_antisubmarine")));
+                equipmentEnemy.setValue_evasion(cursor.getString(cursor.getColumnIndex("value_evasion")));
+                equipmentEnemy.setValue_armor(cursor.getString(cursor.getColumnIndex("value_armor")));
+
+                list.add(equipmentEnemy);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return list;
+    }
+
+    //sync
+    public void syncEquipmentEnemy(List<EquipmentEnemy> list) {
+        if (isTableEmpty(FeedReaderContract.TABLE_EQUIPMENTENEMY)) {
+            for (EquipmentEnemy equipmentEnemy : list) {
+                insertEquipmentEnemy(equipmentEnemy);
+            }
+        } else {
+
+            db.beginTransaction();
+            try {
+                db.delete(FeedReaderContract.TABLE_EQUIPMENTENEMY,null,null);
+
+                for (EquipmentEnemy equipmentEnemy :list) {
+                    insertEquipmentEnemy(equipmentEnemy);
+                }
+
+                db.setTransactionSuccessful();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            finally {
+                db.endTransaction();
+            }
+        }
+    }
+
+
+    /**
+     * EquipmentUpgrade Utils
+     *
+     */
+
+    //getEquipmentUpgradeContentValues
+    private ContentValues getEquipmentUpgradeValues (EquipmentUpgrade equipmentUpgrade) {
+        ContentValues values = new ContentValues();
+
+        values.put("category",equipmentUpgrade.getCategory());
+        values.put("position",equipmentUpgrade.getPosition());
+        values.put("name",equipmentUpgrade.getName());
+        values.put("star",equipmentUpgrade.getStar());
+        values.put("consume_fuel",equipmentUpgrade.getConsume_fuel());
+        values.put("consume_bullet",equipmentUpgrade.getConsume_bullet());
+        values.put("consume_steel",equipmentUpgrade.getConsume_bullet());
+        values.put("consume_alum",equipmentUpgrade.getConsume_alum());
+        values.put("consume_material",equipmentUpgrade.getConsume_material());
+        values.put("consume_screw",equipmentUpgrade.getConsume_screw());
+        values.put("consume_equipment",equipmentUpgrade.getConsume_equipment());
+
+        //upgradeable_day key
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (int i = 0;i<equipmentUpgrade.getUpgradeable_day().size();i++) {
+            stringBuilder.append(equipmentUpgrade.getUpgradeable_day().get(i));
+
+            if (i == equipmentUpgrade.getUpgradeable_day().size() - 1) {
+                break;
+            }
+
+            stringBuilder.append(",");
+        }
+        values.put("upgradeable_day",stringBuilder.toString());
+
+        //assistant key
+        StringBuilder builder = new StringBuilder();
+
+        for(int i = 0;i<equipmentUpgrade.getAssistant_ship().size();i++) {
+            builder.append(equipmentUpgrade.getAssistant_ship().get(i));
+
+            if (i == equipmentUpgrade.getAssistant_ship().size() - 1) {
+                break;
+            }
+
+            builder.append(",");
+        }
+
+        values.put("assistant_ship",builder.toString());
+
+        values.put("upgrade_result",equipmentUpgrade.getUpgrade_result());
+        values.put("upgrade_result_inventable",equipmentUpgrade.getUpgrade_result_inventable());
+
+        return values;
+    }
+
+    //insert
+    private void insertEquipmentUpgrade(EquipmentUpgrade equipmentUpgrade) {
+
+        db.insert(FeedReaderContract.TABLE_EQUIPMENTUPGRADE,null,getEquipmentUpgradeValues(equipmentUpgrade));
+    }
+
+    //load
+    public List<EquipmentUpgrade> loadEquipmentUpgrade () {
+        List<EquipmentUpgrade> list = new ArrayList<>();
+        Cursor cursor = db.query(FeedReaderContract.TABLE_EQUIPMENTUPGRADE,null,null,null,null,null,null);
+
+        //query all
+        if (cursor.moveToFirst()) {
+            do {
+                EquipmentUpgrade equipmentUpgrade = new EquipmentUpgrade();
+
+                equipmentUpgrade.setCategory(cursor.getString(cursor.getColumnIndex("category")));
+                equipmentUpgrade.setPosition(cursor.getString(cursor.getColumnIndex("position")));
+                equipmentUpgrade.setName(cursor.getString(cursor.getColumnIndex("name")));
+                equipmentUpgrade.setConsume_fuel(cursor.getString(cursor.getColumnIndex("consume_fuel")));
+                equipmentUpgrade.setConsume_bullet(cursor.getString(cursor.getColumnIndex("consume_bullet")));
+                equipmentUpgrade.setConsume_steel(cursor.getString(cursor.getColumnIndex("consume_steel")));
+                equipmentUpgrade.setConsume_alum(cursor.getString(cursor.getColumnIndex("consume_alum")));
+                equipmentUpgrade.setConsume_material(cursor.getString(cursor.getColumnIndex("consume_material")));
+                equipmentUpgrade.setConsume_screw(cursor.getString(cursor.getColumnIndex("consume_screw")));
+                equipmentUpgrade.setConsume_equipment(cursor.getString(cursor.getColumnIndex("consume_equipment")));
+
+                //upgrade_day
+                ArrayList<String> strings = new ArrayList<>();
+                String s = cursor.getString(cursor.getColumnIndex("upgradeable_day"));
+
+                int flag = 0;
+                for (int i = 0;i<s.length();i++) {
+                    if(Character.toString(s.charAt(i)).equals(",") || i == s.length() - 1) {
+                        strings.add(s.substring(flag,i));
+                        flag = i;
+                    }
+                }
+                equipmentUpgrade.setUpgradeable_day(strings);
+
+                //assistant
+                ArrayList<String> stringArrayList = new ArrayList<>();
+                String string = cursor.getString(cursor.getColumnIndex("assistant_ship"));
+
+                flag = 0;
+                for (int i = 0;i<string.length();i++) {
+                    if (Character.toString(s.charAt(i)).equals(",") || i == string.length() - 1) {
+                        stringArrayList.add(string.substring(flag,i));
+                        flag = i;
+                    }
+                }
+                equipmentUpgrade.setAssistant_ship(stringArrayList);
+
+                equipmentUpgrade.setUpgrade_result(cursor.getString(cursor.getColumnIndex("upgrade_result")));
+                equipmentUpgrade.setUpgrade_result_inventable(cursor.getString(cursor.getColumnIndex("upgrade_result_inventable")));
+
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return list;
+    }
+
+    //sync
+    public void syncEquipmentUpgrade (List<EquipmentUpgrade> list) {
+        if (isTableEmpty(FeedReaderContract.TABLE_EQUIPMENTUPGRADE)) {
+            for (EquipmentUpgrade equipmentUpgrade :list) {
+                insertEquipmentUpgrade(equipmentUpgrade);
+            }
+        } else {
+
+            db.beginTransaction();
+            try {
+                db.delete(FeedReaderContract.TABLE_EQUIPMENTUPGRADE,null,null);
+                for (EquipmentUpgrade equipmentUpgrade: list) {
+                    insertEquipmentUpgrade(equipmentUpgrade);
+                }
+                db.setTransactionSuccessful();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            finally {
+                db.endTransaction();
+            }
+        }
+    }
 }
