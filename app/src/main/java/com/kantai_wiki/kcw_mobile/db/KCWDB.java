@@ -85,7 +85,12 @@ public class KCWDB {
         }
     }
 
-    //loadQuest
+    /**
+     * This method is to load Quest into a List
+     * @return The List which contains Quests
+     */
+
+    //load
     public List<Quest> loadQuest() {
         List<Quest> list = new ArrayList<>();
         Cursor cursor = db.query("Quest", null, null, null, null, null, null);
@@ -175,10 +180,14 @@ public class KCWDB {
     //insert Expedition
     private void insertExpedition(Expedition expedition) {
         if(expedition != null) {
-            db.insert(DBContract.TABLE_EXPEDITION,null,getExpeditionValue(expedition));
+            db.insert(DBContract.TABLE_EXPEDITION, null, getExpeditionValue(expedition));
         }
     }
 
+    /**
+     * This method is to load Expedition to a List
+     * @return The List which contains Expedition Object
+     */
     //loadExpedition
     public List<Expedition> loadExpedition() {
         List<Expedition> list = new ArrayList<>();
@@ -284,12 +293,17 @@ public class KCWDB {
     private void insertEquipmentKMS (EquipmentKMS equipmentkms) {
 
         if (equipmentkms != null) {
-            db.insert(DBContract.TABLE_EQUIPMENTKMS,null,getEquipmentKMSValues(equipmentkms));
+            db.insert(DBContract.TABLE_EQUIPMENTKMS, null, getEquipmentKMSValues(equipmentkms));
         }
     }
 
+    /**
+     * This method is to load EquipmentKMS in to a List
+     * @return The List which contains EquipmentKMS Object
+     */
+
     //load
-    public List<EquipmentKMS> loadEquipemntKMS () {
+    public List<EquipmentKMS> loadEquipmentKMS() {
 
         List<EquipmentKMS> list = new ArrayList<>();
         Cursor cursor = db.query(DBContract.TABLE_EQUIPMENTKMS,null,null,null,null,null,null);
@@ -397,6 +411,11 @@ public class KCWDB {
             db.insert(DBContract.TABLE_EQUIPMENTENEMY, null, getEquipmentEnemyValues(equipmentEnemy));
         }
     }
+
+    /**
+     * This method is to load EquipmentEnemy into a List
+     * @return The List which contains EquipmentEnemy Object
+     */
 
     //load
     public List<EquipmentEnemy> loadEquipmentEnemy() {
@@ -520,6 +539,11 @@ public class KCWDB {
 
         db.insert(DBContract.TABLE_EQUIPMENTUPGRADE, null, getEquipmentUpgradeValues(equipmentUpgrade));
     }
+
+    /**
+     * This method is to load EquipmentUpgrade into a List
+     * @return The List which contains EquipmentUpgrade Objects
+     */
 
     //load
     public List<EquipmentUpgrade> loadEquipmentUpgrade () {

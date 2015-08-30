@@ -23,10 +23,12 @@ public class SyncTask extends AsyncTask<String, Void, Boolean>{
 
     Context context;
     final int syncType;
+    public SyncResponse syncResponse = null;
 
     /**
      * The SyncTask extends AsyncTask
      * Use it to sync data from server
+     * You must implement the SyncResponse interface to get the resultStatus
      * @param context The context that you current running
      * @param syncType Please indicate the syncType,
      *                 The Type is contained at SyncTypeContract Class
@@ -81,5 +83,10 @@ public class SyncTask extends AsyncTask<String, Void, Boolean>{
             return false;
         }
         return true;
+    }
+
+    @Override
+    protected void onPostExecute(Boolean aBoolean) {
+        syncResponse.processFinish(aBoolean);
     }
 }
