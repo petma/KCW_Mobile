@@ -2,6 +2,7 @@ package com.kantai_wiki.kcw_mobile.background_task;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.kantai_wiki.kcw_mobile.db.KCWDB;
 import com.kantai_wiki.kcw_mobile.model.EquipmentEnemy;
@@ -21,23 +22,23 @@ import java.util.List;
  */
 public class SyncTask extends AsyncTask<String, Void, Boolean>{
 
+    final int taskType;
+    public TaskResponse taskResponse = null;
     Context context;
-    final int syncType;
-    public SyncResponse syncResponse = null;
 
     /**
      * The SyncTask extends AsyncTask
      * Use it to sync data from server
-     * You must implement the SyncResponse interface to get the resultStatus
+     * You must implement the TaskResponse interface to get the resultStatus
      * @param context The context that you current running
-     * @param syncType Please indicate the syncType,
-     *                 The Type is contained at SyncTypeContract Class
+     * @param taskType Please indicate the syncType,
+     *                 The Type is contained at TaskTypeContract Class
      */
 
-    public SyncTask(Context context,int syncType) {
+    public SyncTask(Context context, int taskType) {
         super();
         this.context = context;
-        this.syncType = syncType;
+        this.taskType = taskType;
     }
 
     @Override
@@ -45,41 +46,47 @@ public class SyncTask extends AsyncTask<String, Void, Boolean>{
         KCWDB kcwdb = KCWDB.getInstance(context);
         try {
             String response = HTTPUtils.download(urls[0]);
-            switch (syncType) {
-                case SyncTypeContract.SYNC_TYPE_QUEST :
+            switch (taskType) {
+                case TaskTypeContract.TASK_TYPE_QUEST:
                     List<Quest> questList;
                     questList = Parser.praseQuest(response);
                     kcwdb.syncQuest(questList);
                     break;
 
-                case SyncTypeContract.SYNC_TYPE_EXPEDITION:
+                case TaskTypeContract.TASK_TYPE_EXPEDITION:
                     List<Expedition> expeditionList;
                     expeditionList = Parser.praseExpedition(response);
                     kcwdb.syncExpedition(expeditionList);
                     break;
 
-                case SyncTypeContract.SYNC_TYPE_EQUIPMENT_KMS:
+                case TaskTypeContract.TASK_TYPE_EQUIPMENT_KMS:
                     List<EquipmentKMS> equipmentKMSList;
                     equipmentKMSList = Parser.parseEquipmentKMS(response);
                     kcwdb.EquipmentKMS(equipmentKMSList);
                     break;
 
-                case SyncTypeContract.SYNC_TYPE_EQUIPMENT_ENEMY:
+                case TaskTypeContract.TASK_TYPE_EQUIPMENT_ENEMY:
                     List<EquipmentEnemy> equipmentEnemyList;
                     equipmentEnemyList = Parser.parseEquipmentEnemy(response);
                     kcwdb.syncEquipmentEnemy(equipmentEnemyList);
                     break;
 
-                case SyncTypeContract.SYNC_TYPE_EQUIPMENT_UPGRADE:
+                case TaskTypeContract.TASK_TYPE_EQUIPMENT_UPGRADE:
                     List<EquipmentUpgrade> equipmentUpgradeList;
                     equipmentUpgradeList = Parser.parseEquipmentUpgrade(response);
                     kcwdb.syncEquipmentUpgrade(equipmentUpgradeList);
                     break;
 
-                default:throw new IOException();
+                default:
+                    throw new IllegalArgumentException();
             }
         }
         catch (IOException e) {
+            taskResponse.processFinish(false, "Connection fail! Please check your connection");
+            return false;
+        } catch (IllegalArgumentException e) {
+            taskResponse.processFinish(false, "The task type is illegal");
+            Log.d("IllegalArgument", "The task type is illegal");
             return false;
         }
         return true;
@@ -87,6 +94,9 @@ public class SyncTask extends AsyncTask<String, Void, Boolean>{
 
     @Override
     protected void onPostExecute(Boolean aBoolean) {
-        syncResponse.processFinish(aBoolean);
+        if (!aBoolean) {
+            return;
+        }
+        taskResponse.processFinish(true, "SUCCESS");
     }
 }

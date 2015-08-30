@@ -47,7 +47,7 @@ public class KCWDB {
     private boolean isTableEmpty(String TABLE_NAME) {
 
         boolean flag;
-        String quString = "SELETE COUNT(*) FROM TABLE " + TABLE_NAME;
+        String quString = "SELECT COUNT(*) FROM TABLE " + TABLE_NAME;
         Cursor cursor = db.rawQuery(quString, null);
         cursor.moveToFirst();
         flag = cursor.getInt(0) == 0;
@@ -132,7 +132,7 @@ public class KCWDB {
 
             db.beginTransaction();
             try {
-                db.delete(DBContract.TABLE_QUEST,null,null);
+                db.delete(DBContract.TABLE_QUEST, null, null);
                 for (Quest quest :list) {
                     insertQuest(quest);
                 }
@@ -399,7 +399,7 @@ public class KCWDB {
         values.put("value_explosion",equipmentEnemy.getValue_explosion());
         values.put("value_antisubmarine",equipmentEnemy.getValue_antisubmarine());
         values.put("value_evasion",equipmentEnemy.getValue_evasion());
-        values.put("value_armor",equipmentEnemy.getValue_armor());
+        values.put("value_armor", equipmentEnemy.getValue_armor());
 
         return values;
     }
