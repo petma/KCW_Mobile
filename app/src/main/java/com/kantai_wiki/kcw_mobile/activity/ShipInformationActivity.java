@@ -1,10 +1,13 @@
-package com.kantai_wiki.kcw_mobile;
+package com.kantai_wiki.kcw_mobile.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.kantai_wiki.kcw_mobile.R;
+
 /**
- * Created by admin on 2015/8/29.
+ * Created by Jushe on 2015/8/29.
+ *
  */
 public class ShipInformationActivity extends AppCompatActivity {
     @Override
