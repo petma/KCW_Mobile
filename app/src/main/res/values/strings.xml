@@ -20,4 +20,11 @@
 
     <string name="TabFragment_4">装备</string>
     <string name="TabFragment_5">任务</string>
+    <string name="drawer_item_back">首页</string>
+    <string name="drawer_item_nightmode">夜战突入</string>
+    <string name="drawer_item_settings">我的设置</string>
+    <string name="drawer_item_help">帮助与反馈</string>
+    <string name="drawer_item_about">关于我们</string>
+    <string name="drawer_item_update">检查更新</string>
+    <string name="drawer_item_exit">退出程序</string>
 </resources>
