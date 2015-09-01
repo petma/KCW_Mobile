@@ -14,6 +14,7 @@
     <TextView
         android:clickable="true"
         android:focusable="true"
+        android:background="@drawable/ship_item_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="25sp"
