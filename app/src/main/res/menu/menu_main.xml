@@ -1,13 +1,39 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
-    <item android:id="@+id/action_settings1" android:title="@string/action_settings1"
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+    <item
+        android:id="@+id/action_settings1"
+        android:title="@string/action_settings1"
         android:orderInCategory="100" />
-    <item android:id="@+id/action_setings2" android:title="@string/action_settings2"
+    <item
+        android:id="@+id/action_setings2"
+        android:icon="@drawable/abc_ic_search_api_mtrl_alpha"
+        android:title="@string/action_settings2"
         android:orderInCategory="100" />
-    <item android:id="@+id/action_setings3" android:title="@string/action_settings3"
+    <item
+        android:id="@+id/action_setings3"
+        android:title="@string/action_settings3"
         android:orderInCategory="100" />
-    <item android:id="@+id/action_setings4" android:title="@string/action_settings4"
+    <item
+        android:id="@+id/action_setings4"
+        android:title="@string/action_settings4"
         android:orderInCategory="100" />
-    <item android:id="@+id/action_setings5" android:title="@string/action_settings5"
+    <item
+        android:id="@+id/action_setings5"
+        android:title="@string/action_settings5"
         android:orderInCategory="100" />
+    <item
+        android:id="@+id/action_out_search"
+        android:icon="@drawable/abc_ic_search_api_mtrl_alpha"
+        android:title="@string/action_out_search"
+        android:orderInCategory="1"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_out_share"
+        android:icon="@drawable/abc_ic_menu_share_mtrl_alpha"
+        android:title="@string/action_out_share"
+        android:orderInCategory="2"
+        app:showAsAction="always" />
 </menu>

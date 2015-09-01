@@ -3,7 +3,10 @@ package com.kantai_wiki.kcw_mobile.activity;
 /**
  * Created by airfr on 2015/8/25.
  */
+import android.content.ContentUris;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +17,7 @@ import android.widget.Toast;
 
 import com.kantai_wiki.kcw_mobile.R;
 
+import java.net.ContentHandler;
 import java.util.ArrayList;
 
 
@@ -55,7 +59,7 @@ public class TabFragment_attack extends Fragment {
 
     ListView listView;
     MapCategoryAdapter adapter;
-
+    FloatingActionButton btnFab;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
 
@@ -67,19 +71,39 @@ public class TabFragment_attack extends Fragment {
         View v = inflater.inflate(R.layout.tab_fragment_attack, container, false);
         listView = (ListView)v.findViewById(R.id.attack_map_list);
         listView.setAdapter(adapter);
-
+        btnFab = (FloatingActionButton) v.findViewById(R.id.fba_attack);
         //Click Event
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                String map = (String)adapter.getItem(position);
-                Toast.makeText(getActivity(),"You clicked " + map,Toast.LENGTH_SHORT).show();
+                String map = (String) adapter.getItem(position);
+                Toast.makeText(getActivity(), "You clicked " + map, Toast.LENGTH_SHORT).show();
 
                 //// TODO: 2015/8/25 Start new activity to display attack map info
+            }
+        });
+        final View mCoord = (View)v.findViewById(R.id.attack_coord);
+        btnFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                v.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+                Snackbar snackbar = Snackbar.make(mCoord, "So this is a Snackbar!", Snackbar.LENGTH_LONG);
+                snackbar.getView().setBackgroundColor(getResources().getColor(R.color.crepusculo_kantai_main_primarydark));
+                snackbar.setAction("Toast", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getActivity(), "So this is a Toast!", Toast.LENGTH_LONG)
+                                .show();
+                    }
+                })
+                        .show();
             }
         });
 
         return v;
     }
+
+
+
 }

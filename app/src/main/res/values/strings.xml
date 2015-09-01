@@ -1,22 +1,30 @@
 <resources>
     <string name="app_name">KCW_Mobile</string>
-
+    <string name="kcw_app_name">-艦これ- Wiki</string>
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings1">我的设置</string>
-    <string name="action_settings2">你的设置</string>
-    <string name="action_settings3">关于我们</string>
-    <string name="action_settings4">关于你们</string>
-    <string name="action_settings5">关于他们</string>
-
+            <string name="action_settings1">我的设置</string>
+            <string name="action_settings2">你的设置</string>
+            <string name="action_settings3">关于我们</string>
+            <string name="action_settings4">关于你们</string>
+            <string name="action_settings5">关于他们</string>
+        <string name="action_out_search">search</string>
+        <string name="action_out_share">share</string>
     <string name="TabFragment_1">出击</string>
     <string name="TabFragment_2">远征</string>
     <!--舰船-->
     <string name="TabFragment_3">舰船</string>
-    <string name="TabFragment_3_1_SwitchOn">敌方舰船</string>
-    <string name="TabFragment_3_1_SwitchOff">我方舰船</string>
-    <string name="TabFragment_3_2_SwitchOn">满级数据</string>
-    <string name="TabFragment_3_2_SwitchOff">初级数据</string>
+        <string name="TabFragment_3_1_SwitchOn">敌方舰船</string>
+        <string name="TabFragment_3_1_SwitchOff">我方舰船</string>
+        <string name="TabFragment_3_2_SwitchOn">满级数据</string>
+        <string name="TabFragment_3_2_SwitchOff">初级数据</string>
 
     <string name="TabFragment_4">装备</string>
     <string name="TabFragment_5">任务</string>
+    <string name="drawer_item_back">首页</string>
+    <string name="drawer_item_nightmode">夜战突入</string>
+    <string name="drawer_item_settings">我的设置</string>
+    <string name="drawer_item_help">帮助与反馈</string>
+    <string name="drawer_item_about">关于我们</string>
+    <string name="drawer_item_update">检查更新</string>
+    <string name="drawer_item_exit">退出程序</string>
 </resources>
