@@ -18,11 +18,24 @@ import java.util.List;
 public class ShipAdapter extends RecyclerView.Adapter<ShipAdapter.ShipViewHolder> {
 
     private List<String> shipData;
+    private List<String> shipTitle;
     private LayoutInflater inflater;
+    private  final int LAYOUT_ITEM_TITlE = 0;
+    private  final int LAYOUT_ITEM_LIST = 1;
+    private static int type = 0;
 
     //Constructor
     public ShipAdapter(Context context) {
         inflater = LayoutInflater.from(context);
+    }
+
+    //Choose type
+    public void setType(int yourType){
+        this.type = yourType;
+    }
+
+    public int getType(){
+        return type;
     }
 
     //The interface for OnItemClick
@@ -36,6 +49,15 @@ public class ShipAdapter extends RecyclerView.Adapter<ShipAdapter.ShipViewHolder
     }
 
     @Override
+    public int getItemViewType(int position) {
+        if(shipTitle.indexOf(shipData.get(position)) >= 0)
+            return LAYOUT_ITEM_TITlE;
+        else
+            return LAYOUT_ITEM_LIST;
+
+    }
+
+    @Override
     public int getItemCount(){
         return shipData.size();
     }
@@ -43,14 +65,30 @@ public class ShipAdapter extends RecyclerView.Adapter<ShipAdapter.ShipViewHolder
     @Override
     public ShipViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
-        ShipViewHolder holder = new ShipViewHolder(inflater
-                .inflate(R.layout.ship_map_item, parent, false));
+        ShipViewHolder holder;
+        if(viewType == LAYOUT_ITEM_TITlE) {
+             holder = new ShipViewHolder(inflater
+                    .inflate(R.layout.ship_map_item, parent, false), viewType);
+        }
+        else{
+             holder = new ShipViewHolder(inflater.inflate(R.layout.ship_map_item_list,parent,false), viewType);
+        }
         return holder;
     }
 
     @Override
     public void onBindViewHolder (ShipViewHolder holder,final int position) {
-        holder.shipItem.setText(shipData.get(position));
+        switch (getItemViewType(position)){
+            case LAYOUT_ITEM_LIST:
+                ShipViewHolder holder1 = (ShipViewHolder) holder;
+                holder1.shipItem.setText(shipData.get(position));
+                break;
+            case LAYOUT_ITEM_TITlE:
+                ShipViewHolder holder2 = (ShipViewHolder) holder;
+                holder2.shipItem.setText(shipData.get(position));
+                break;
+        }
+
         if (listener != null) {
             holder.shipItem.setOnClickListener(new View.OnClickListener() {
 
@@ -62,45 +100,68 @@ public class ShipAdapter extends RecyclerView.Adapter<ShipAdapter.ShipViewHolder
         }
     }
 
+
     class ShipViewHolder extends RecyclerView.ViewHolder{
 
         TextView shipItem;
 
-        public ShipViewHolder(View v)
+        public ShipViewHolder(View v, int viewType)
         {
             super(v);
-            shipItem = (TextView) v.findViewById(R.id.ship_map_list_item);
+            if(viewType == LAYOUT_ITEM_TITlE) {
+                shipItem = (TextView) v.findViewById(R.id.ship_map_list_title);
+            }
+            else{
+                shipItem = (TextView) v.findViewById(R.id.ship_map_list_item);
+            }
         }
+
     }
 
     protected void iniData(String[] shipName){
         shipData = new ArrayList<String>();
+        shipTitle = new ArrayList<String>();
         for(String sn: shipName){
             shipData.add(sn);
+            shipTitle.add(sn);
         }
 
     }
 
     public void addItem(String content, int position) {
         shipData.add(position, content);
-        notifyItemInserted(position); //Attention!
+        notifyItemInserted(position); //Attention!It won't refresh the position
+        notifyItemRangeChanged(position, shipData.size());
     }
 
     public void removeItem(String model) {
         int position = shipData.indexOf(model);
         shipData.remove(position);
-        notifyItemRemoved(position);//Attention!
+        notifyItemRemoved(position);//Attention!It won't refresh the position
+        notifyItemRangeChanged(position, shipData.size());
     }
 
-    public void removeAllItem(String[] data){
-        for(String temp:data){
+    public void removeAllItem(String[] data, String[] title){
+        for(String temp: data) {
             removeItem(temp);
         }
     }
 
     public void addAllItem(String[] data){
         for(int position = 0; position < data.length; position++) {
-            addItem(data[position], position);
+            setType(LAYOUT_ITEM_LIST);
+            addItem(data[position], shipData.size());
         }
     }
+
+    public void addAllItem(String[] data,String[] title, int position ){
+        for(int i = position + 1, j = 0; j < data.length; i++,j++){
+            addItem(data[j], i);
+        }
+    }
+
+    public List<String> getShipData(){
+        return shipData;
+    }
+
 }

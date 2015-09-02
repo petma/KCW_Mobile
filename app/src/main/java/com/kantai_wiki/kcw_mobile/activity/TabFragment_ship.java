@@ -16,22 +16,26 @@ import android.widget.Toast;
 
 import com.kantai_wiki.kcw_mobile.R;
 
+import java.util.List;
+
 
 /**
  * Created by airfr on 2015/8/24.
  */
 
-public  class TabFragment_ship extends Fragment{
+public  class TabFragment_ship extends Fragment {
     private RecyclerView shipRecyclerView;
+    private static final int CLOSE = 0;
+    private static final int OPEN = 1;
     //private LinearLayoutManager layoutManager;
-    private String[] shipClass1 = {"驱逐舰","轻巡/雷巡","重巡/航巡","战舰","正规空母","潜水舰","其它舰艇"};
-    private String[] shipClass2 ={"返回上一级","次级分类","次级分类","次级分类","次级分类"};
-    private String[] shipClass3 ={"返回上一级","三级分类","三级分类","三级分类","三级分类"};
-    private int classKey = 1;
+    private String[] shipClass1 = {"驱逐舰", "轻巡/雷巡", "重巡/航巡", "战舰", "正规空母", "潜水舰", "其它舰艇"};
+    private String[] shipClass2 = {"返回上一级", "次级分类", "次级分类", "次级分类", "次级分类"};
+    private String[] shipClass3 = {"返回上一级", "三级分类", "三级分类", "三级分类", "三级分类"};
+    private int[] classStatus = {0,0,0,0,0,0,0};
     private ShipAdapter shipAdapter;
 
     @Override
-    public View onCreateView(LayoutInflater layoutInflater, ViewGroup container,Bundle saveInstanceBundle){
+    public View onCreateView(LayoutInflater layoutInflater, ViewGroup container, Bundle saveInstanceBundle) {
         View v = layoutInflater.inflate(R.layout.tab_fragment_ship, container, false);
         shipAdapter = new ShipAdapter(getActivity());
         shipAdapter.iniData(shipClass1);
@@ -43,48 +47,102 @@ public  class TabFragment_ship extends Fragment{
             @Override
             public void onItemClickListener(View view, int position) {
                 itemViewChoose(position);
+                Log.d("Click:", "it is " + position);
             }
         });
         return v;
     }
 
     public void itemViewChoose(int position) {
-        if (position == 0) {
-            if (classKey == 1) {
-                shipAdapter.removeAllItem(shipClass1);
-                shipAdapter.addAllItem(shipClass2);
-                Log.d("position = 0", "classKey = " + classKey);
-                classKey++;
-            } else if(classKey == 2){
-                shipAdapter.removeAllItem(shipClass2);
-                shipAdapter.addAllItem(shipClass1);
-                Log.d("position = 0", "classKey = " + classKey);
-                classKey--;
-            } else if(classKey == 3){
-                shipAdapter.removeAllItem(shipClass3);
-                shipAdapter.addAllItem(shipClass2);
-                Log.d("position = 0", "classKey = " + classKey);
-                classKey--;
+        switch(shipAdapter.getShipData().get(position)){
+            case"驱逐舰": {
+                if (classStatus[0] != OPEN) {
+                    shipAdapter.addAllItem(shipClass2, shipClass1,position);
+                    //shipAdapter.addAllItem(shipClass2, position);
+                    classStatus[0] = OPEN;
+                }
+                else{
+                    shipAdapter.removeAllItem(shipClass2,shipClass1);
+                    classStatus[0] = CLOSE;
+                }
+                break;
             }
-        }
-        else
-        {
-            if(classKey == 1) {
-                shipAdapter.removeAllItem(shipClass1);
-                shipAdapter.addAllItem(shipClass2);
-                Log.d("classKey", "classKey = " + classKey);
-                classKey++;
-            }else if(classKey == 2){
-                shipAdapter.removeAllItem(shipClass2);
-                shipAdapter.addAllItem(shipClass3);
-                Log.d("classKey", "classKey = " + classKey);
-                classKey++;
-            }else if(classKey == 3){
-                Log.d("classKey","classKey = " + classKey);
-                Intent intent = new Intent(getActivity(), ShipInformationActivity.class);
-                intent.putExtra("position",position);//use position to judge load which ship
-                startActivity(intent);
+            case "轻巡/雷巡":{
+                if (classStatus[1] != OPEN) {
+                    shipAdapter.addAllItem(shipClass2, shipClass1,position);
+                    //shipAdapter.addAllItem(shipClass2, position);
+                    classStatus[1] = OPEN;
+                }
+                else{
+                    shipAdapter.removeAllItem(shipClass2,shipClass1);
+                    classStatus[1] = CLOSE;
+                }
+                break;
+            }
+            case "重巡/航巡":{
+                if (classStatus[2] != OPEN) {
+                    shipAdapter.addAllItem(shipClass2, shipClass1,position);
+                   // shipAdapter.addAllItem(shipClass2, position);
+                    classStatus[2] = OPEN;
+                }
+                else{
+                    shipAdapter.removeAllItem(shipClass2,shipClass1);
+                    classStatus[2] = CLOSE;
+                }
+                break;
+            }
+            case "战舰":{
+                if (classStatus[3] != OPEN) {
+                    shipAdapter.addAllItem(shipClass2, shipClass1,position);
+                   // shipAdapter.addAllItem(shipClass2, position);
+                    classStatus[3] = OPEN;
+                }
+                else{
+                    shipAdapter.removeAllItem(shipClass2,shipClass1);
+                    classStatus[3] = CLOSE;
+                }
+                break;
+            }
+            case "正规空母":{
+                if (classStatus[4] != OPEN) {
+                    shipAdapter.addAllItem(shipClass2, shipClass1,position);
+                   // shipAdapter.addAllItem(shipClass2, position);
+                    classStatus[4] = OPEN;
+                }
+                else{
+                    shipAdapter.removeAllItem(shipClass2,shipClass1);
+                    classStatus[4] = CLOSE;
+                }
+                break;
+            }
+            case "潜水舰":{
+                if (classStatus[5] != OPEN) {
+                    shipAdapter.addAllItem(shipClass2, shipClass1,position);
+                   // shipAdapter.addAllItem(shipClass2, position);
+                    classStatus[5] = OPEN;
+                }
+                else{
+                    shipAdapter.removeAllItem(shipClass2,shipClass1);
+                    classStatus[5] = CLOSE;
+                }
+                break;
+            }
+            case "其它舰艇":{
+                if (classStatus[6] != OPEN) {
+                    shipAdapter.addAllItem(shipClass2, shipClass1,position);
+                   // shipAdapter.addAllItem(shipClass2, position);
+                    classStatus[6] = OPEN;
+                }
+                else{
+                    shipAdapter.removeAllItem(shipClass2,shipClass1);
+                    classStatus[6] = CLOSE;
+                }
+                break;
+            }
+            default:{
+                startActivity(new Intent(getActivity(), ShipInformationActivity.class));
             }
         }
     }
+
 }

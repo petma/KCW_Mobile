@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="25sp"
-        android:id="@+id/ship_map_list_item"/>
+        android:id="@+id/ship_map_list_title"/>
 
 </LinearLayout>
 </android.support.v7.widget.CardView>
