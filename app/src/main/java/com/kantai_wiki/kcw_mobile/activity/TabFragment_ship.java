@@ -57,84 +57,84 @@ public  class TabFragment_ship extends Fragment {
         switch(shipAdapter.getShipData().get(position)){
             case"驱逐舰": {
                 if (classStatus[0] != OPEN) {
-                    shipAdapter.addAllItem(shipClass2, shipClass1,position);
+                    shipAdapter.addAllItem(shipClass2,position);
                     //shipAdapter.addAllItem(shipClass2, position);
                     classStatus[0] = OPEN;
                 }
                 else{
-                    shipAdapter.removeAllItem(shipClass2,shipClass1);
+                    shipAdapter.removeAllItem(shipClass2);
                     classStatus[0] = CLOSE;
                 }
                 break;
             }
             case "轻巡/雷巡":{
                 if (classStatus[1] != OPEN) {
-                    shipAdapter.addAllItem(shipClass2, shipClass1,position);
+                    shipAdapter.addAllItem(shipClass2, position);
                     //shipAdapter.addAllItem(shipClass2, position);
                     classStatus[1] = OPEN;
                 }
                 else{
-                    shipAdapter.removeAllItem(shipClass2,shipClass1);
+                    shipAdapter.removeAllItem(shipClass2);
                     classStatus[1] = CLOSE;
                 }
                 break;
             }
             case "重巡/航巡":{
                 if (classStatus[2] != OPEN) {
-                    shipAdapter.addAllItem(shipClass2, shipClass1,position);
+                    shipAdapter.addAllItem(shipClass2,position);
                    // shipAdapter.addAllItem(shipClass2, position);
                     classStatus[2] = OPEN;
                 }
                 else{
-                    shipAdapter.removeAllItem(shipClass2,shipClass1);
+                    shipAdapter.removeAllItem(shipClass2);
                     classStatus[2] = CLOSE;
                 }
                 break;
             }
             case "战舰":{
                 if (classStatus[3] != OPEN) {
-                    shipAdapter.addAllItem(shipClass2, shipClass1,position);
+                    shipAdapter.addAllItem(shipClass2,position);
                    // shipAdapter.addAllItem(shipClass2, position);
                     classStatus[3] = OPEN;
                 }
                 else{
-                    shipAdapter.removeAllItem(shipClass2,shipClass1);
+                    shipAdapter.removeAllItem(shipClass2);
                     classStatus[3] = CLOSE;
                 }
                 break;
             }
             case "正规空母":{
                 if (classStatus[4] != OPEN) {
-                    shipAdapter.addAllItem(shipClass2, shipClass1,position);
+                    shipAdapter.addAllItem(shipClass2,position);
                    // shipAdapter.addAllItem(shipClass2, position);
                     classStatus[4] = OPEN;
                 }
                 else{
-                    shipAdapter.removeAllItem(shipClass2,shipClass1);
+                    shipAdapter.removeAllItem(shipClass2);
                     classStatus[4] = CLOSE;
                 }
                 break;
             }
             case "潜水舰":{
                 if (classStatus[5] != OPEN) {
-                    shipAdapter.addAllItem(shipClass2, shipClass1,position);
+                    shipAdapter.addAllItem(shipClass2,position);
                    // shipAdapter.addAllItem(shipClass2, position);
                     classStatus[5] = OPEN;
                 }
                 else{
-                    shipAdapter.removeAllItem(shipClass2,shipClass1);
+                    shipAdapter.removeAllItem(shipClass2);
                     classStatus[5] = CLOSE;
                 }
                 break;
             }
             case "其它舰艇":{
                 if (classStatus[6] != OPEN) {
-                    shipAdapter.addAllItem(shipClass2, shipClass1,position);
+                    shipAdapter.addAllItem(shipClass2,position);
                    // shipAdapter.addAllItem(shipClass2, position);
                     classStatus[6] = OPEN;
                 }
                 else{
-                    shipAdapter.removeAllItem(shipClass2,shipClass1);
+                    shipAdapter.removeAllItem(shipClass2);
                     classStatus[6] = CLOSE;
                 }
                 break;

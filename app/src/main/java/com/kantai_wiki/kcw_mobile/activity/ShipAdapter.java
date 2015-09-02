@@ -34,6 +34,7 @@ public class ShipAdapter extends RecyclerView.Adapter<ShipAdapter.ShipViewHolder
         this.type = yourType;
     }
 
+    //Get the type you choose
     public int getType(){
         return type;
     }
@@ -48,6 +49,7 @@ public class ShipAdapter extends RecyclerView.Adapter<ShipAdapter.ShipViewHolder
         this.listener = listener;
     }
 
+    //Decided the ViewType that which is the title and list
     @Override
     public int getItemViewType(int position) {
         if(shipTitle.indexOf(shipData.get(position)) >= 0)
@@ -66,6 +68,7 @@ public class ShipAdapter extends RecyclerView.Adapter<ShipAdapter.ShipViewHolder
     public ShipViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
         ShipViewHolder holder;
+        //According the viewType to inflate the layout
         if(viewType == LAYOUT_ITEM_TITlE) {
              holder = new ShipViewHolder(inflater
                     .inflate(R.layout.ship_map_item, parent, false), viewType);
@@ -78,6 +81,7 @@ public class ShipAdapter extends RecyclerView.Adapter<ShipAdapter.ShipViewHolder
 
     @Override
     public void onBindViewHolder (ShipViewHolder holder,final int position) {
+        //According the vieType to set ViewHolder
         switch (getItemViewType(position)){
             case LAYOUT_ITEM_LIST:
                 ShipViewHolder holder1 = (ShipViewHolder) holder;
@@ -130,23 +134,24 @@ public class ShipAdapter extends RecyclerView.Adapter<ShipAdapter.ShipViewHolder
 
     public void addItem(String content, int position) {
         shipData.add(position, content);
-        notifyItemInserted(position); //Attention!It won't refresh the position
-        notifyItemRangeChanged(position, shipData.size());
+        notifyItemInserted(position); //Attention!
+        notifyItemRangeChanged(position, shipData.size());//Here it refresh the position
     }
 
     public void removeItem(String model) {
         int position = shipData.indexOf(model);
         shipData.remove(position);
-        notifyItemRemoved(position);//Attention!It won't refresh the position
-        notifyItemRangeChanged(position, shipData.size());
+        notifyItemRemoved(position);//Attention!
+        notifyItemRangeChanged(position, shipData.size());//Here it refresh the position
     }
 
-    public void removeAllItem(String[] data, String[] title){
+    public void removeAllItem(String[] data){
         for(String temp: data) {
             removeItem(temp);
         }
     }
 
+    //add new String array from the first position
     public void addAllItem(String[] data){
         for(int position = 0; position < data.length; position++) {
             setType(LAYOUT_ITEM_LIST);
@@ -154,7 +159,8 @@ public class ShipAdapter extends RecyclerView.Adapter<ShipAdapter.ShipViewHolder
         }
     }
 
-    public void addAllItem(String[] data,String[] title, int position ){
+    //add String array from the position
+    public void addAllItem(String[] data, int position ){
         for(int i = position + 1, j = 0; j < data.length; i++,j++){
             addItem(data[j], i);
         }
