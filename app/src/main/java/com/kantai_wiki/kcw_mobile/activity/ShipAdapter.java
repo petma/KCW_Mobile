@@ -80,4 +80,27 @@ public class ShipAdapter extends RecyclerView.Adapter<ShipAdapter.ShipViewHolder
         }
 
     }
+
+    public void addItem(String content, int position) {
+        shipData.add(position, content);
+        notifyItemInserted(position); //Attention!
+    }
+
+    public void removeItem(String model) {
+        int position = shipData.indexOf(model);
+        shipData.remove(position);
+        notifyItemRemoved(position);//Attention!
+    }
+
+    public void removeAllItem(String[] data){
+        for(String temp:data){
+            removeItem(temp);
+        }
+    }
+
+    public void addAllItem(String[] data){
+        for(int position = 0; position < data.length; position++) {
+            addItem(data[position], position);
+        }
+    }
 }
