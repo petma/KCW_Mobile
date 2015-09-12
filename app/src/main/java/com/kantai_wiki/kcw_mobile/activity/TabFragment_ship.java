@@ -5,13 +5,18 @@ package com.kantai_wiki.kcw_mobile.activity;
  */
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.Scroller;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kantai_wiki.kcw_mobile.R;
@@ -55,17 +60,31 @@ public  class TabFragment_ship extends Fragment {
     private String[] OS = {"大鲸"};
     /******************* ships' name end here ************************/
 
-    private int[] classStatus = {0,0,0,0,0,0,0};
+    private int[] classStatus = {0,0,0,0,0,0,0,0};
     private ShipAdapter shipAdapter;
     private RecyclerView shipRecyclerView;
+    private LinearLayoutManager shipLM;
+
+    //StickTitle
+    private CardView stickTitle;
+    private TextView stickTitle_text;
+    private RelativeLayout.LayoutParams stickTitleLayoutParams;
+    private int y = 0;
+    private boolean scrollKey;
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup container, Bundle saveInstanceBundle) {
         View v = layoutInflater.inflate(R.layout.tab_fragment_ship, container, false);
+        //StickTitle
+        stickTitle = (CardView) v.findViewById(R.id.ship_map_list_Sticktitle);
+        stickTitle.setVisibility(View.GONE);
+        stickTitle_text = (TextView) v.findViewById(R.id.ship_map_list_Sticktitle_text);
+        //ShipAdapter
         shipAdapter = new ShipAdapter(getActivity());
         shipAdapter.iniData(shipType);
+        shipLM = new LinearLayoutManager(getActivity());
         shipRecyclerView = (RecyclerView) v.findViewById(R.id.ship_map_list);
-        shipRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        shipRecyclerView.setLayoutManager(shipLM);
         shipRecyclerView.setAdapter(shipAdapter);
         //Click
         shipAdapter.setOnItemClickListener(new ShipAdapter.OnItemClickListener() {
@@ -75,8 +94,84 @@ public  class TabFragment_ship extends Fragment {
                 Log.d("Click:", "it is " + position);
             }
         });
+
+        shipRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                int firstVisibleCompletelyPosition = shipLM.findFirstCompletelyVisibleItemPosition();
+                int firstVisiblePosition = shipLM.findFirstVisibleItemPosition();
+                int firstInVisibleTitle;
+                if (dy > 0) {
+                    if (shipAdapter.getShipTitle().indexOf(shipAdapter.getShipData().get(firstVisibleCompletelyPosition)) < 0) {
+                        for (firstInVisibleTitle = firstVisibleCompletelyPosition;
+                             shipAdapter.getShipTitle().indexOf(shipAdapter.getShipData().get(firstInVisibleTitle)) < 0;
+                             firstInVisibleTitle--) ;
+                        /**init the stickTitle location**/
+                        stickTitleLayoutParams = (RelativeLayout.LayoutParams) stickTitle.getLayoutParams();
+                        stickTitleLayoutParams.setMargins(5, 0, 5, 0);
+                        stickTitle.setLayoutParams(stickTitleLayoutParams);
+                        /********************************/
+                        y = 0;
+                        scrollKey = false;
+                        stickTitle.setVisibility(View.VISIBLE);
+                        stickTitle_text.setText(shipAdapter.getShipData().get(firstInVisibleTitle));
+                    } else if (shipAdapter.getShipTitle().indexOf(shipAdapter.getShipData().get(firstVisibleCompletelyPosition)) >= 0) {
+                        y += dy;
+                        //scroll delay
+                        if (y >= 15 && scrollKey == false) {
+                            scrollKey = true;
+                            y = 0;
+                        }
+                        // start to scroll
+                        if (scrollKey == true) {
+                            stickTitleLayoutParams = (RelativeLayout.LayoutParams) stickTitle.getLayoutParams();
+                            stickTitleLayoutParams.setMargins(5, -y, 5, 0);
+                            stickTitle.setLayoutParams(stickTitleLayoutParams);
+                        }
+                    } else {
+                        stickTitle.setVisibility(View.GONE);
+                    }
+                } else if (dy < 0) {
+                    if (shipAdapter.getShipTitle().indexOf(shipAdapter.getShipData().get(firstVisibleCompletelyPosition)) >= 0
+                            && shipAdapter.getShipTitle().indexOf(shipAdapter.getShipData().get(firstVisiblePosition)) < 0) {
+                        if (firstVisibleCompletelyPosition != 0) {
+                            for (firstInVisibleTitle = firstVisibleCompletelyPosition - 1;
+                                 shipAdapter.getShipTitle().indexOf(shipAdapter.getShipData().get(firstInVisibleTitle)) < 0;
+                                 firstInVisibleTitle--) ;
+                            /**init the stickTitle location**/
+                            stickTitleLayoutParams = (RelativeLayout.LayoutParams) stickTitle.getLayoutParams();
+                            stickTitleLayoutParams.setMargins(5, -25, 5, 0);
+                            stickTitle.setLayoutParams(stickTitleLayoutParams);
+                            /********************************/
+                            y = 25;
+                            scrollKey = true;
+                            stickTitle_text.setText(shipAdapter.getShipData().get(firstInVisibleTitle));
+                        }
+                    }
+                    else if(shipAdapter.getShipTitle().indexOf(shipAdapter.getShipData().get(firstVisiblePosition)) < 0) {
+                        y += dy;
+                        // start to scroll
+                        if (scrollKey == true) {
+                            stickTitle.setVisibility(View.VISIBLE);
+                            stickTitleLayoutParams = (RelativeLayout.LayoutParams) stickTitle.getLayoutParams();
+                            stickTitleLayoutParams.setMargins(5, -y, 5, 0);
+                            stickTitle.setLayoutParams(stickTitleLayoutParams);
+                        }
+                        if(y < 0 && scrollKey == true){
+                            scrollKey = false;
+                        }
+                    }
+                    else{
+                        stickTitle.setVisibility(View.GONE);
+                    }
+                }
+
+            }
+        });
+
         return v;
     }
+
 
     public void itemViewChoose(int position) {
         switch(shipAdapter.getShipData().get(position)){
@@ -153,26 +248,26 @@ public  class TabFragment_ship extends Fragment {
                 break;
             }
             case "潜水舰":{
-                if (classStatus[5] != OPEN) {
-                    shipAdapter.addAllItem(SS,position);
-                    // shipAdapter.addAllItem(shipClass2, position);
-                    classStatus[5] = OPEN;
-                }
-                else{
-                    shipAdapter.removeAllItem(SS);
-                    classStatus[5] = CLOSE;
-                }
-                break;
-            }
-            case "其它舰艇":{
                 if (classStatus[6] != OPEN) {
-                    shipAdapter.addAllItem(OS,position);
+                    shipAdapter.addAllItem(SS,position);
                     // shipAdapter.addAllItem(shipClass2, position);
                     classStatus[6] = OPEN;
                 }
                 else{
-                    shipAdapter.removeAllItem(OS);
+                    shipAdapter.removeAllItem(SS);
                     classStatus[6] = CLOSE;
+                }
+                break;
+            }
+            case "其它舰艇":{
+                if (classStatus[7] != OPEN) {
+                    shipAdapter.addAllItem(OS,position);
+                    // shipAdapter.addAllItem(shipClass2, position);
+                    classStatus[7] = OPEN;
+                }
+                else{
+                    shipAdapter.removeAllItem(OS);
+                    classStatus[7] = CLOSE;
                 }
                 break;
             }
@@ -181,8 +276,4 @@ public  class TabFragment_ship extends Fragment {
             }
         }
     }
-
-
-
-
 }

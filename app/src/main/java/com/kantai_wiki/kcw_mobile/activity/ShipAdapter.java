@@ -170,4 +170,8 @@ public class ShipAdapter extends RecyclerView.Adapter<ShipAdapter.ShipViewHolder
         return shipData;
     }
 
+    public List<String> getShipTitle(){
+        return shipTitle;
+    }
+
 }
