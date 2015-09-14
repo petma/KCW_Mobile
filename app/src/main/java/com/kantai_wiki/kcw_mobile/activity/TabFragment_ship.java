@@ -69,9 +69,8 @@ public  class TabFragment_ship extends Fragment {
     private CardView stickTitle;
     private TextView stickTitle_text;
     private RelativeLayout.LayoutParams stickTitleLayoutParams;
-    private int y = 0;
+    private int y = 30;
     private boolean scrollKey;
-
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup container, Bundle saveInstanceBundle) {
         View v = layoutInflater.inflate(R.layout.tab_fragment_ship, container, false);
@@ -105,7 +104,8 @@ public  class TabFragment_ship extends Fragment {
                     if (shipAdapter.getShipTitle().indexOf(shipAdapter.getShipData().get(firstVisibleCompletelyPosition)) < 0) {
                         for (firstInVisibleTitle = firstVisibleCompletelyPosition;
                              shipAdapter.getShipTitle().indexOf(shipAdapter.getShipData().get(firstInVisibleTitle)) < 0;
-                             firstInVisibleTitle--) ;
+                             firstInVisibleTitle--)
+                            ;
                         /**init the stickTitle location**/
                         stickTitleLayoutParams = (RelativeLayout.LayoutParams) stickTitle.getLayoutParams();
                         stickTitleLayoutParams.setMargins(5, 0, 5, 0);
@@ -137,32 +137,31 @@ public  class TabFragment_ship extends Fragment {
                         if (firstVisibleCompletelyPosition != 0) {
                             for (firstInVisibleTitle = firstVisibleCompletelyPosition - 1;
                                  shipAdapter.getShipTitle().indexOf(shipAdapter.getShipData().get(firstInVisibleTitle)) < 0;
-                                 firstInVisibleTitle--) ;
-                            /**init the stickTitle location**/
-                            stickTitleLayoutParams = (RelativeLayout.LayoutParams) stickTitle.getLayoutParams();
-                            stickTitleLayoutParams.setMargins(5, -25, 5, 0);
-                            stickTitle.setLayoutParams(stickTitleLayoutParams);
-                            /********************************/
-                            y = 25;
-                            scrollKey = true;
-                            stickTitle_text.setText(shipAdapter.getShipData().get(firstInVisibleTitle));
+                                 firstInVisibleTitle--)
+                                ;
+                            if (classStatus[shipAdapter.getShipTitle().indexOf(shipAdapter.getShipData().get(firstInVisibleTitle))] == OPEN && scrollKey == false) {
+                                /**init the stickTitle location***/
+                                stickTitleLayoutParams = (RelativeLayout.LayoutParams) stickTitle.getLayoutParams();
+                                stickTitleLayoutParams.setMargins(5, -50, 5, 0);
+                                stickTitle.setVisibility(View.VISIBLE);
+                                stickTitle.setLayoutParams(stickTitleLayoutParams);
+                                scrollKey = true;
+                                y = 50;
+                                /********************************/
+                            } else if (classStatus[shipAdapter.getShipTitle().indexOf(shipAdapter.getShipData().get(firstInVisibleTitle))] == OPEN && scrollKey == true) {
+                                if (y > 0) {
+                                    y += dy;
+                                }
+                                stickTitle_text.setText(shipAdapter.getShipData().get(firstInVisibleTitle));
+                                //Scroll
+                                stickTitleLayoutParams = (RelativeLayout.LayoutParams) stickTitle.getLayoutParams();
+                                stickTitleLayoutParams.setMargins(5, -y, 5, 0);
+                                stickTitle.setLayoutParams(stickTitleLayoutParams);
+                            }
                         }
-                    }
-                    else if(shipAdapter.getShipTitle().indexOf(shipAdapter.getShipData().get(firstVisiblePosition)) < 0) {
-                        y += dy;
-                        // start to scroll
-                        if (scrollKey == true) {
-                            stickTitle.setVisibility(View.VISIBLE);
-                            stickTitleLayoutParams = (RelativeLayout.LayoutParams) stickTitle.getLayoutParams();
-                            stickTitleLayoutParams.setMargins(5, -y, 5, 0);
-                            stickTitle.setLayoutParams(stickTitleLayoutParams);
-                        }
-                        if(y < 0 && scrollKey == true){
-                            scrollKey = false;
-                        }
-                    }
-                    else{
+                    } else if(shipAdapter.getShipTitle().indexOf(shipAdapter.getShipData().get(firstVisibleCompletelyPosition)) >= 0){
                         stickTitle.setVisibility(View.GONE);
+                        scrollKey = false;
                     }
                 }
 
