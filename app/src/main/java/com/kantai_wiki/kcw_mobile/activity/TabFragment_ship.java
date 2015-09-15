@@ -152,6 +152,9 @@ public  class TabFragment_ship extends Fragment {
                                 if (y > 0) {
                                     y += dy;
                                 }
+                                if (y <= 0){
+                                    y = 0;
+                                }
                                 stickTitle_text.setText(shipAdapter.getShipData().get(firstInVisibleTitle));
                                 //Scroll
                                 stickTitleLayoutParams = (RelativeLayout.LayoutParams) stickTitle.getLayoutParams();
@@ -159,7 +162,7 @@ public  class TabFragment_ship extends Fragment {
                                 stickTitle.setLayoutParams(stickTitleLayoutParams);
                             }
                         }
-                    } else if(shipAdapter.getShipTitle().indexOf(shipAdapter.getShipData().get(firstVisibleCompletelyPosition)) >= 0){
+                    } else if (shipAdapter.getShipTitle().indexOf(shipAdapter.getShipData().get(firstVisibleCompletelyPosition)) >= 0) {
                         stickTitle.setVisibility(View.GONE);
                         scrollKey = false;
                     }
@@ -167,7 +170,14 @@ public  class TabFragment_ship extends Fragment {
 
             }
         });
-
+        stickTitle_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shipLM.scrollToPosition(shipAdapter.getShipData().indexOf(stickTitle_text.getText()));
+                Log.d("stickTitle", "Click");
+                stickTitle.setVisibility(View.GONE);
+            }
+        });
         return v;
     }
 
