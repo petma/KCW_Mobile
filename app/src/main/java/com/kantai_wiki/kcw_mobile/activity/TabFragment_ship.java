@@ -173,9 +173,11 @@ public  class TabFragment_ship extends Fragment {
         stickTitle_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                shipLM.scrollToPosition(shipAdapter.getShipData().indexOf(stickTitle_text.getText()));
+                int position = shipAdapter.getShipData().indexOf(stickTitle_text.getText());
+                shipLM.scrollToPosition(position);
                 Log.d("stickTitle", "Click");
                 stickTitle.setVisibility(View.GONE);
+                itemViewChoose(position);
             }
         });
         return v;
