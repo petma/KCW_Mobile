@@ -80,7 +80,7 @@ public  class TabFragment_ship extends Fragment {
         stickTitle_text = (TextView) v.findViewById(R.id.ship_map_list_Sticktitle_text);
         //ShipAdapter
         shipAdapter = new ShipAdapter(getActivity());
-        shipAdapter.iniData(shipType);
+        shipAdapter.iniData_Title(shipType);
         shipLM = new LinearLayoutManager(getActivity());
         shipRecyclerView = (RecyclerView) v.findViewById(R.id.ship_map_list);
         shipRecyclerView.setLayoutManager(shipLM);
