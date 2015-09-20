@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="crepusculo_kantai_main">#4876FF</color>
+    <color name="crepusculo_kantai_main_primary">#3F51B5</color>
     <color name="crepusculo_kantai_main_primarydark">#303F9F</color>
     <!-- Material DEFAULT colors -->
     <color name="material_drawer_primary">#2196F3</color>
