@@ -1,14 +1,18 @@
 package com.kantai_wiki.kcw_mobile.activity;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
@@ -90,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         // do something with the clicked item :D
                         int id = drawerItem.getIdentifier();
-                        switch (id){
+                        switch (id) {
                             case 1:
 
                                 return true;
@@ -100,14 +104,15 @@ public class MainActivity extends AppCompatActivity {
                             case 3:
                             case 4:
                             case 5:
-                                Snackbar.make(view, "You Click "+id+"th button", Snackbar.LENGTH_LONG).show();
+                                Snackbar.make(view, "You Click " + id + "th button", Snackbar.LENGTH_LONG).show();
                                 return true;
                             case 6:
                                 finish();
                                 return true;
                             case 7:
                                 return true;
-                        }return true;
+                        }
+                        return true;
                     }
                 })
                 .build();
@@ -116,22 +121,57 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_out_search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setIconifiedByDefault(true);// 设置是否自动缩小为图标
+        searchView.setSubmitButtonEnabled(true);// 设置是否显示搜索按钮
+        searchView.setIconified(true);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String key) {
+                //After you press Search/Enter control comes here with entered text in "key"
+                Snackbar.make(findViewById(R.id.main_layout),"Your input \""+key+"\" for searching has already saved in key",Snackbar.LENGTH_LONG).show();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String key) {
+                //Each time you enter/modify a charcter, control comes here with entered text in "key"
+                return true;
+            }
+        });
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        int i = 0;
         //noinspection SimplifiableIfStatement
         switch (id){
-            case 1:
-
-            case 2:
-
+            case R.id.action_settings1:
+                ++i;
+            case R.id.action_settings2:
+                ++i;
+            case R.id.action_settings3:
+                ++i;
+            case R.id.action_settings4:
+                ++i;
+            case R.id.action_settings5:
+                ++i;
+            case R.id.action_out_search:
+                ++i;
+                return true;
+            case R.id.action_out_share:
+                ++i;
+                Snackbar.make(this.findViewById(R.id.main_layout),"You Click the id " ,Snackbar.LENGTH_LONG).show();
                 return true;
         }
         return super.onOptionsItemSelected(item);
