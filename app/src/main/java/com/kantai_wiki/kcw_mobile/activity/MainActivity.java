@@ -2,10 +2,13 @@ package com.kantai_wiki.kcw_mobile.activity;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.preference.DialogPreference;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -96,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
                         int id = drawerItem.getIdentifier();
                         switch (id) {
                             case 1:
-
                                 return true;
                             case 2:
                                 closeOptionsMenu();
@@ -107,14 +109,31 @@ public class MainActivity extends AppCompatActivity {
                                 Snackbar.make(view, "You Click " + id + "th button", Snackbar.LENGTH_LONG).show();
                                 return true;
                             case 6:
-                                finish();
+                                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                                dialog.setTitle("POI~");
+                                dialog.setMessage("确定退出舰队百科？");
+                                dialog.setCancelable(true);
+                                dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        finish();
+                                    }
+                                });
+                                dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                });
+                                dialog.show();
                                 return true;
                             case 7:
                                 return true;
                         }
+
                         return true;
                     }
-                })
+    })
                 .build();
     }
     @Override
