@@ -8,20 +8,20 @@
         android:title="@string/action_settings1"
         android:orderInCategory="100" />
     <item
-        android:id="@+id/action_setings2"
+        android:id="@+id/action_settings2"
         android:icon="@drawable/abc_ic_search_api_mtrl_alpha"
         android:title="@string/action_settings2"
         android:orderInCategory="100" />
     <item
-        android:id="@+id/action_setings3"
+        android:id="@+id/action_settings3"
         android:title="@string/action_settings3"
         android:orderInCategory="100" />
     <item
-        android:id="@+id/action_setings4"
+        android:id="@+id/action_settings4"
         android:title="@string/action_settings4"
         android:orderInCategory="100" />
     <item
-        android:id="@+id/action_setings5"
+        android:id="@+id/action_settings5"
         android:title="@string/action_settings5"
         android:orderInCategory="100" />
     <item
@@ -29,11 +29,12 @@
         android:icon="@drawable/abc_ic_search_api_mtrl_alpha"
         android:title="@string/action_out_search"
         android:orderInCategory="1"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom"
+        app:actionViewClass="android.support.v7.widget.SearchView"/>
     <item
         android:id="@+id/action_out_share"
         android:icon="@drawable/abc_ic_menu_share_mtrl_alpha"
         android:title="@string/action_out_share"
         android:orderInCategory="2"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 </menu>
