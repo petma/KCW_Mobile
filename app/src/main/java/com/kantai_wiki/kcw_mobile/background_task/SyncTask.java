@@ -20,88 +20,84 @@ import java.util.List;
  * Created by Wafer on 2015/8/31.
  *
  */
-public class SyncTask extends AsyncTask<Void, Void, Boolean>{
+public class SyncTask extends AsyncTask<Void, Void, List<?>>{
 
     private int taskType;
-    public TaskResponse taskResponse = null;
+    public TaskListener taskListener = null;
     Context context;
 
     /**
      * The SyncTask extends AsyncTask
      * Use it to sync data from server
-     * You must implement the TaskResponse interface to get the resultStatus
+     * You must implement the TaskListener interface to get the resultStatus
      * @param context The context that you current running
      * @param taskType Please indicate the syncType,
      *                 The Type is contained at TaskTypeContract Class
+     * @param taskListener This is the taskListener. You must implement this
+     *                         interface with your Activity to run this Task.
      */
-
-    public SyncTask(Context context, int taskType) {
+    public SyncTask(Context context, int taskType, TaskListener taskListener) {
         super();
         this.context = context;
         this.taskType = taskType;
+        this.taskListener = taskListener;
     }
 
     @Override
-    protected Boolean doInBackground(Void... params) {
+    protected List<?> doInBackground(Void... params) {
         KCWDB kcwdb = KCWDB.getInstance(context);
         try {
+            //sync
             String response = HTTPUtils.download(HTTPUtils.getURL(taskType));
             switch (taskType) {
                 case TaskTypeContract.TASK_TYPE_QUEST:
                     List<Quest> questList;
                     questList = Parser.praseQuest(response);
                     kcwdb.syncQuest(questList);
-                    break;
+                    return questList;
 
                 case TaskTypeContract.TASK_TYPE_EXPEDITION:
                     List<Expedition> expeditionList;
                     expeditionList = Parser.praseExpedition(response);
                     kcwdb.syncExpedition(expeditionList);
-                    break;
+                    return expeditionList;
 
                 case TaskTypeContract.TASK_TYPE_EQUIPMENT_KMS:
                     List<EquipmentKMS> equipmentKMSList;
                     equipmentKMSList = Parser.parseEquipmentKMS(response);
-                    kcwdb.EquipmentKMS(equipmentKMSList);
-                    break;
+                    kcwdb.syncEquipmentKMS(equipmentKMSList);
+                    return equipmentKMSList;
 
                 case TaskTypeContract.TASK_TYPE_EQUIPMENT_ENEMY:
                     List<EquipmentEnemy> equipmentEnemyList;
                     equipmentEnemyList = Parser.parseEquipmentEnemy(response);
                     kcwdb.syncEquipmentEnemy(equipmentEnemyList);
-                    break;
+                    return  equipmentEnemyList;
 
                 case TaskTypeContract.TASK_TYPE_EQUIPMENT_UPGRADE:
                     List<EquipmentUpgrade> equipmentUpgradeList;
                     equipmentUpgradeList = Parser.parseEquipmentUpgrade(response);
                     kcwdb.syncEquipmentUpgrade(equipmentUpgradeList);
-                    break;
+                    return equipmentUpgradeList;
 
                 default:
                     throw new IllegalArgumentException();
             }
         }
         catch (IOException e) {
-            taskResponse.processFinish(false, "Connection fail! Please check your connection");
-            return false;
+            return null;
         }
         catch (IllegalArgumentException e) {
-            taskResponse.processFinish(false, "The task type is illegal");
             Log.d("IllegalArgument", "The task type is illegal");
-            return false;
+            return null;
         }
         catch (IllegalAccessException e) {
-            taskResponse.processFinish(false,"DataBase ERROR!");
-            return false;
+            return null;
         }
-        return true;
     }
 
     @Override
-    protected void onPostExecute(Boolean aBoolean) {
-        if (!aBoolean) {
-            return;
-        }
-        taskResponse.processFinish(true, "SUCCESS");
+    protected void onPostExecute(List<?> list) {
+        taskListener.onResult(list);
     }
 }

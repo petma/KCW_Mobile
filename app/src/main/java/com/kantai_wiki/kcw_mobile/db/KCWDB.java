@@ -354,7 +354,7 @@ public class KCWDB {
 
 
     //sync
-    public void EquipmentKMS (List<EquipmentKMS> list) throws IllegalAccessException {
+    public void syncEquipmentKMS (List<EquipmentKMS> list) throws IllegalAccessException {
         if (isTableEmpty(DBContract.TABLE_EQUIPMENTKMS)) {
             for (EquipmentKMS equipmentkms : list) {
                 insertEquipmentKMS(equipmentkms);
