@@ -122,7 +122,7 @@ public class ShipAdapter extends RecyclerView.Adapter<ShipAdapter.ShipViewHolder
 
     }
 
-    protected void iniData(String[] shipName){
+    protected void iniData_Title(String[] shipName){
         shipData = new ArrayList<String>();
         shipTitle = new ArrayList<String>();
         for(String sn: shipName){

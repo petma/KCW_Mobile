@@ -80,7 +80,7 @@ public  class TabFragment_ship extends Fragment {
         stickTitle_text = (TextView) v.findViewById(R.id.ship_map_list_Sticktitle_text);
         //ShipAdapter
         shipAdapter = new ShipAdapter(getActivity());
-        shipAdapter.iniData(shipType);
+        shipAdapter.iniData_Title(shipType);
         shipLM = new LinearLayoutManager(getActivity());
         shipRecyclerView = (RecyclerView) v.findViewById(R.id.ship_map_list);
         shipRecyclerView.setLayoutManager(shipLM);
@@ -105,7 +105,7 @@ public  class TabFragment_ship extends Fragment {
                         for (firstInVisibleTitle = firstVisibleCompletelyPosition;
                              shipAdapter.getShipTitle().indexOf(shipAdapter.getShipData().get(firstInVisibleTitle)) < 0;
                              firstInVisibleTitle--)
-                            ;
+                            ;// find the last title position
                         /**init the stickTitle location**/
                         stickTitleLayoutParams = (RelativeLayout.LayoutParams) stickTitle.getLayoutParams();
                         stickTitleLayoutParams.setMargins(5, 0, 5, 0);
@@ -165,6 +165,16 @@ public  class TabFragment_ship extends Fragment {
                     } else if (shipAdapter.getShipTitle().indexOf(shipAdapter.getShipData().get(firstVisibleCompletelyPosition)) >= 0) {
                         stickTitle.setVisibility(View.GONE);
                         scrollKey = false;
+                    }
+                    else{
+                        for (firstInVisibleTitle = firstVisibleCompletelyPosition;
+                             shipAdapter.getShipTitle().indexOf(shipAdapter.getShipData().get(firstInVisibleTitle)) < 0;
+                             firstInVisibleTitle--)
+                            ;
+                        stickTitleLayoutParams = (RelativeLayout.LayoutParams) stickTitle.getLayoutParams();
+                        stickTitleLayoutParams.setMargins(5, 0, 5, 0);
+                        stickTitle.setLayoutParams(stickTitleLayoutParams);
+                        stickTitle_text.setText(shipAdapter.getShipData().get(firstInVisibleTitle));
                     }
                 }
 
