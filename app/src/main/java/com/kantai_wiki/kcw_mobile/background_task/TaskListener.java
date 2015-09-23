@@ -16,8 +16,6 @@ public interface TaskListener {
      * @param list This is the List you sync/load for,
      *             please cast it to which you want,
      *             care for the risk of force cast.
-     * @return I set the return type as a List,
-     *         you could just return the list you receive.
      */
-    List<?> onResult(List<?> list);
+    void onResult(List<?> list);
 }
