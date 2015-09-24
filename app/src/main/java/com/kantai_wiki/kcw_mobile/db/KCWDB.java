@@ -47,7 +47,7 @@ public class KCWDB {
     private boolean isTableEmpty(String TABLE_NAME) {
 
         boolean flag;
-        String quString = "SELECT COUNT(*) FROM TABLE " + TABLE_NAME;
+        String quString = "SELECT COUNT(*) FROM " + TABLE_NAME;
         Cursor cursor = db.rawQuery(quString, null);
         cursor.moveToFirst();
         flag = cursor.getInt(0) == 0;

@@ -2,6 +2,7 @@ package com.kantai_wiki.kcw_mobile.background_task;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.kantai_wiki.kcw_mobile.db.KCWDB;
 import com.kantai_wiki.kcw_mobile.model.EquipmentEnemy;
@@ -34,10 +35,13 @@ public class LoadTask extends AsyncTask<Void, Void, List<?>> {
      * @param context The current context which you are running
      */
 
-    public LoadTask(Context context,int taskType,TaskListener taskListener) {
+    public LoadTask(Context context,int taskType) {
         this.context = context;
-        this.taskListener = taskListener;
         this.taskTypes = taskType;
+    }
+
+    public void setTaskListener(TaskListener taskListener) {
+        this.taskListener = taskListener;
     }
 
     @Override
@@ -58,6 +62,7 @@ public class LoadTask extends AsyncTask<Void, Void, List<?>> {
                         questList = Parser.praseQuest(response);
                         kcwdb.syncQuest(questList);
                     } catch (IOException e) {
+                        Log.d("NETWORK","Error!!!!");
                         return null;
                     } catch (IllegalAccessException e) {
                         return null;

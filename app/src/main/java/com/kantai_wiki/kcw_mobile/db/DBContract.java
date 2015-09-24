@@ -157,7 +157,7 @@ public final class DBContract {
             EquipmentUpgrade.COLUMN_UPGRADEABLE_DAY + TYPE_TEXT + COMMA_SET +
             EquipmentUpgrade.COLUMN_ASSISTANT_SHIP + TYPE_TEXT + COMMA_SET +
             EquipmentUpgrade.COLUMN_UPGRADE_RESULT + TYPE_TEXT + COMMA_SET +
-            EquipmentUpgrade.COLUMN_UPGRADE_RESULT_INVENTABLE + TYPE_TEXT + COMMA_SET +
+            EquipmentUpgrade.COLUMN_UPGRADE_RESULT_INVENTABLE + TYPE_TEXT +
             " )";
 
     public static final String SQL_DELETE_EQUIPMENTUPGRADE =
@@ -177,7 +177,7 @@ public final class DBContract {
             EquipmentEnemy.COLUMN_VALUE_EXPLOSION + TYPE_TEXT + COMMA_SET +
             EquipmentEnemy.COLUMN_VALUE_ANTISUBMARINE + TYPE_TEXT + COMMA_SET +
             EquipmentEnemy.COLUMN_VALUE_EVASION + TYPE_TEXT + COMMA_SET +
-            EquipmentEnemy.COLUMN_VALUE_ARMOR + TYPE_TEXT + COMMA_SET +
+            EquipmentEnemy.COLUMN_VALUE_ARMOR + TYPE_TEXT +
             " )";
 
     public static final String SQL_DELETE_EQUIPMENTENEMY =
@@ -199,7 +199,7 @@ public final class DBContract {
             EquipmentKMS.COLUMN_VALUE_EVASION + TYPE_TEXT + COMMA_SET +
             EquipmentKMS.COLUMN_RANGE + TYPE_TEXT + COMMA_SET +
             EquipmentKMS.COLUMN_EQUIPPABLE + TYPE_TEXT + COMMA_SET +
-            EquipmentKMS.COLUMN_NOTICE + TYPE_TEXT + COMMA_SET +
+            EquipmentKMS.COLUMN_NOTICE + TYPE_TEXT +
             " )";
 
     public static final String SQL_DELETE_EQUIPMENTKMS =

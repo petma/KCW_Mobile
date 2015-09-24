@@ -85,6 +85,7 @@ public class SyncTask extends AsyncTask<Void, Void, List<?>>{
             }
         }
         catch (IOException e) {
+            Log.d("NETWORK","ERROR!!!!!");
             return null;
         }
         catch (IllegalArgumentException e) {
