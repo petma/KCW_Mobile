@@ -47,7 +47,7 @@ public class KCWDB {
     private boolean isTableEmpty(String TABLE_NAME) {
 
         boolean flag;
-        String quString = "SELECT COUNT(*) FROM TABLE " + TABLE_NAME;
+        String quString = "SELECT COUNT(*) FROM " + TABLE_NAME;
         Cursor cursor = db.rawQuery(quString, null);
         cursor.moveToFirst();
         flag = cursor.getInt(0) == 0;
@@ -66,6 +66,7 @@ public class KCWDB {
         ContentValues values = new ContentValues();
         values.put("category", quest.getCategory());
         values.put("type", quest.getType());
+        values.put("id",quest.getId());
         values.put("prequest_id", quest.getPrequest_id());
         values.put("name", quest.getName());
         values.put("reward_fuel", quest.getReward_fuel());
@@ -103,6 +104,7 @@ public class KCWDB {
                 quest.setType(cursor.getString(cursor.getColumnIndex("type")));
                 quest.setId(cursor.getString(cursor.getColumnIndex("id")));
                 quest.setPrequest_id(cursor.getString(cursor.getColumnIndex("prequest_id")));
+                quest.setName(cursor.getString(cursor.getColumnIndex("name")));
                 quest.setReward_fuel(cursor.getString(cursor.getColumnIndex("reward_fuel")));
                 quest.setReward_bullet(cursor.getString(cursor.getColumnIndex("reward_bullet")));
                 quest.setReward_steel(cursor.getString(cursor.getColumnIndex("reward_steel")));
