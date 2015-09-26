@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="false">
+        <shape
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:shape="rectangle">
+        <!--<gradient-->
+        <!--android:type=["linear" | "radial" | "sweep"] &#45;&#45; 渐变类型：线性，径向，扫描-->
+        <!--android:angle="float"-->
+        <!--android:startColor="color"-->
+        <!--android:centerColor="color"  &#45;&#45; 中心点颜色-->
+        <!--android:endColor="color"-->
+        <!--android:centerX="float|fraction"  &#45;&#45; 中心点X坐标-->
+        <!--android:centerY="float|fraction"  &#45;&#45; 中心点Y坐标-->
+        <!--android:gradientRadius="float|fraction" &#45;&#45; 径向渐变的半径-->
+        <!--android:useLevel=["true" | "false"] />-->
+        <corners
+        android:radius="0dp"
+        android:topLeftRadius="0dp"
+        android:topRightRadius="0dp"
+        android:bottomLeftRadius="0dp"
+        android:bottomRightRadius="0dp" />
+        <padding
+        android:left="1dp"
+        android:top="1dp"
+        android:right="1dp"
+        android:bottom="1dp" />
+        <solid
+        android:color="@color/md_white_1000" />
+    </shape>
+    </item>
+
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="3dp"/>
+            <stroke android:width="1.5dip" android:color="@color/material_grey_600" />
+            <solid android:color="@color/md_white_1000"/>
+        </shape>
+    </item>
+</selector>

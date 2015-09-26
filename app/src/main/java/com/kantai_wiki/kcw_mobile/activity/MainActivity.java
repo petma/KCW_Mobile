@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withName(R.string.drawer_item_about).withIdentifier(5).withIcon(R.drawable.ic_favorite_border),
                         new PrimaryDrawerItem().withName(R.string.drawer_item_exit).withIdentifier(6).withIcon(R.drawable.ic_exit),
                         new DividerDrawerItem().withTag("Wiki"),
-                        new SwitchDrawerItem().withName(R.string.drawer_item_nightmode).withIdentifier(7)
+                        new SwitchDrawerItem().withName(R.string.drawer_item_nightmode).withCheckable(true).withSwitchEnabled(true).withChecked(false).withIdentifier(7)
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
@@ -101,10 +101,14 @@ public class MainActivity extends AppCompatActivity {
                             case 1:
                                 return true;
                             case 2:
-                                closeOptionsMenu();
+                                closeContextMenu();
                                 return true;
                             case 3:
+                                Snackbar.make(view, "You Click " + id + "th button", Snackbar.LENGTH_LONG).show();
+                                return true;
                             case 4:
+                                Snackbar.make(view, "You Click " + id + "th button", Snackbar.LENGTH_LONG).show();
+                                return true;
                             case 5:
                                 Snackbar.make(view, "You Click " + id + "th button", Snackbar.LENGTH_LONG).show();
                                 return true;
@@ -128,12 +132,13 @@ public class MainActivity extends AppCompatActivity {
                                 dialog.show();
                                 return true;
                             case 7:
+                                Snackbar.make(view, "You Click " + id + "th button", Snackbar.LENGTH_LONG).show();
                                 return true;
                         }
 
                         return true;
                     }
-    })
+                })
                 .build();
     }
     @Override
