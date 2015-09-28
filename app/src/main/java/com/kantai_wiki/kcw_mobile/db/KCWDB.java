@@ -276,6 +276,7 @@ public class KCWDB {
 
         values.put("id", equipmentKMS.getId());
         values.put("rare_rate",equipmentKMS.getRare_rate());
+        values.put("name",equipmentKMS.getName());
         values.put("category", equipmentKMS.getCategory());
         values.put("value_firepower",equipmentKMS.getValue_firepower());
         values.put("value_torpedo",equipmentKMS.getValue_torpedo());
