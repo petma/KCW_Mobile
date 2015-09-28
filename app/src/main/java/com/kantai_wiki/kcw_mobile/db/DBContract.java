@@ -73,6 +73,7 @@ public final class DBContract {
         //Design of the table
         public static final String TABLE_NAME = "EquipmentKMS";
         public static final String COLUMN_ID = "id";
+        public static final String COLUMN_NAME = "name";
         public static final String COLUMN_RARE_RATE = "rare_rate";
         public static final String COLUMN_CATEGORY = "category";
         public static final String COLUMN_VALUE_FIREPOWER = "value_firepower";
@@ -188,6 +189,7 @@ public final class DBContract {
             EquipmentKMS._ID + " integer primary key autoincrement" + COMMA_SET +
             EquipmentKMS.COLUMN_ID + TYPE_INTEGER + COMMA_SET +
             EquipmentKMS.COLUMN_RARE_RATE + TYPE_TEXT + COMMA_SET +
+            EquipmentKMS.COLUMN_NAME + TYPE_TEXT + COMMA_SET +
             EquipmentKMS.COLUMN_CATEGORY + TYPE_TEXT + COMMA_SET +
             EquipmentKMS.COLUMN_VALUE_FIREPOWER + TYPE_TEXT + COMMA_SET +
             EquipmentKMS.COLUMN_VALUE_TORPEDO + TYPE_TEXT + COMMA_SET +
