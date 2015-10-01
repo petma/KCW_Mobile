@@ -108,7 +108,7 @@ public  class TabFragment_ship extends Fragment {
                             ;// find the last title position
                         /**init the stickTitle location**/
                         stickTitleLayoutParams = (RelativeLayout.LayoutParams) stickTitle.getLayoutParams();
-                        stickTitleLayoutParams.setMargins(5, 0, 5, 0);
+                        stickTitleLayoutParams.setMargins(10, 0, 10, 0);
                         stickTitle.setLayoutParams(stickTitleLayoutParams);
                         /********************************/
                         y = 0;
@@ -125,7 +125,7 @@ public  class TabFragment_ship extends Fragment {
                         // start to scroll
                         if (scrollKey == true) {
                             stickTitleLayoutParams = (RelativeLayout.LayoutParams) stickTitle.getLayoutParams();
-                            stickTitleLayoutParams.setMargins(5, -y, 5, 0);
+                            stickTitleLayoutParams.setMargins(10, -y, 10, 0);
                             stickTitle.setLayoutParams(stickTitleLayoutParams);
                         }
                     } else {
@@ -142,11 +142,11 @@ public  class TabFragment_ship extends Fragment {
                             if (classStatus[shipAdapter.getShipTitle().indexOf(shipAdapter.getShipData().get(firstInVisibleTitle))] == OPEN && scrollKey == false) {
                                 /**init the stickTitle location***/
                                 stickTitleLayoutParams = (RelativeLayout.LayoutParams) stickTitle.getLayoutParams();
-                                stickTitleLayoutParams.setMargins(5, -50, 5, 0);
+                                stickTitleLayoutParams.setMargins(10, -80, 10, 0);
                                 stickTitle.setVisibility(View.VISIBLE);
                                 stickTitle.setLayoutParams(stickTitleLayoutParams);
                                 scrollKey = true;
-                                y = 50;
+                                y = 80;
                                 /********************************/
                             } else if (classStatus[shipAdapter.getShipTitle().indexOf(shipAdapter.getShipData().get(firstInVisibleTitle))] == OPEN && scrollKey == true) {
                                 if (y > 0) {
@@ -158,7 +158,7 @@ public  class TabFragment_ship extends Fragment {
                                 stickTitle_text.setText(shipAdapter.getShipData().get(firstInVisibleTitle));
                                 //Scroll
                                 stickTitleLayoutParams = (RelativeLayout.LayoutParams) stickTitle.getLayoutParams();
-                                stickTitleLayoutParams.setMargins(5, -y, 5, 0);
+                                stickTitleLayoutParams.setMargins(10, -y, 10, 0);
                                 stickTitle.setLayoutParams(stickTitleLayoutParams);
                             }
                         }
@@ -172,7 +172,7 @@ public  class TabFragment_ship extends Fragment {
                              firstInVisibleTitle--)
                             ;
                         stickTitleLayoutParams = (RelativeLayout.LayoutParams) stickTitle.getLayoutParams();
-                        stickTitleLayoutParams.setMargins(5, 0, 5, 0);
+                        stickTitleLayoutParams.setMargins(10, 0, 10, 0);
                         stickTitle.setLayoutParams(stickTitleLayoutParams);
                         stickTitle_text.setText(shipAdapter.getShipData().get(firstInVisibleTitle));
                     }
