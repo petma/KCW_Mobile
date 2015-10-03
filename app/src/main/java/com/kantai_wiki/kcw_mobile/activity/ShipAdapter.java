@@ -1,6 +1,7 @@
 package com.kantai_wiki.kcw_mobile.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,8 +21,12 @@ public class ShipAdapter extends RecyclerView.Adapter<ShipAdapter.ShipViewHolder
     private List<String> shipData;
     private List<String> shipTitle;
     private LayoutInflater inflater;
-    private  final int LAYOUT_ITEM_TITlE = 0;
-    private  final int LAYOUT_ITEM_LIST = 1;
+    private List<Boolean> typeState;
+
+    private final boolean CLOSE = false;
+    private final boolean OPEN = true;
+    private final int LAYOUT_ITEM_TITlE = 0;
+    private final int LAYOUT_ITEM_LIST = 1;
     private static int type = 0;
 
     //Constructor
@@ -125,11 +130,16 @@ public class ShipAdapter extends RecyclerView.Adapter<ShipAdapter.ShipViewHolder
     protected void iniData_Title(String[] shipName){
         shipData = new ArrayList<String>();
         shipTitle = new ArrayList<String>();
+        typeState = new ArrayList<Boolean>();
         for(String sn: shipName){
             shipData.add(sn);
             shipTitle.add(sn);
         }
-
+        //initiate the typeState
+        for(int i = 0; i < shipTitle.size(); i++){
+            Boolean state = new Boolean(CLOSE);
+            typeState.add(state);
+        }
     }
 
     public void addItem(String content, int position) {
@@ -166,6 +176,8 @@ public class ShipAdapter extends RecyclerView.Adapter<ShipAdapter.ShipViewHolder
         }
     }
 
+    public List<Boolean> getTypeState(){return typeState;}
+
     public List<String> getShipData(){
         return shipData;
     }
@@ -174,4 +186,20 @@ public class ShipAdapter extends RecyclerView.Adapter<ShipAdapter.ShipViewHolder
         return shipTitle;
     }
 
+    public void itemViewChoose(int position, List<String[]> allShipName) {
+        int itemChoose = shipTitle.indexOf(shipData.get(position));
+        if(itemChoose >= 0) {
+            if(typeState.get(itemChoose).booleanValue()) {
+                removeAllItem(allShipName.get(itemChoose));
+                typeState.set(itemChoose, new Boolean(CLOSE));
+            }
+            else{
+                addAllItem(allShipName.get(itemChoose), position);
+                typeState.set(itemChoose,new Boolean(OPEN));
+            }
+        }
+        else{
+            //TODO start the new activity
+        }
+    }
 }
