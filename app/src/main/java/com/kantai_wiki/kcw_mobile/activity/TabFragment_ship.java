@@ -72,7 +72,7 @@ public  class TabFragment_ship extends Fragment {
 
     /******************* ships' name end here ************************/
 
-    private ShipAdapter shipAdapter;
+    private DrawerAdapter shipAdapter;
     private RecyclerView shipRecyclerView;
     private LinearLayoutManager shipLM;
 
@@ -89,15 +89,15 @@ public  class TabFragment_ship extends Fragment {
         stickTitle = (CardView) v.findViewById(R.id.ship_map_list_Sticktitle);
         stickTitle.setVisibility(View.GONE);
         stickTitle_text = (TextView) v.findViewById(R.id.ship_map_list_Sticktitle_text);
-        //ShipAdapter
-        shipAdapter = new ShipAdapter(getActivity());
+        //DrawerAdapter
+        shipAdapter = new DrawerAdapter(getActivity());
         shipAdapter.iniData_Title(shipType);
         shipLM = new LinearLayoutManager(getActivity());
         shipRecyclerView = (RecyclerView) v.findViewById(R.id.ship_map_list);
         shipRecyclerView.setLayoutManager(shipLM);
         shipRecyclerView.setAdapter(shipAdapter);
         //Click
-        shipAdapter.setOnItemClickListener(new ShipAdapter.OnItemClickListener() {
+        shipAdapter.setOnItemClickListener(new DrawerAdapter.OnItemClickListener() {
             @Override
             public void onItemClickListener(View view, int position) {
                 shipAdapter.itemViewChoose(position, shipName);
