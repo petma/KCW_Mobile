@@ -17,31 +17,38 @@ import java.util.List;
  */
 public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerViewHolder> {
 
-    private List<String> shipData;
-    private List<String> shipTitle;
+    private List<String> data;
+    private List<String> title;
     private LayoutInflater inflater;
     private List<Boolean> typeState;
 
     private final boolean CLOSE = false;
     private final boolean OPEN = true;
+
+    public final int LAYOUT_ATTACK = 0;
+    public final int LAYOUT_EQUIPMENT = 1;
+    public final int LAYOUT_EXPEDITION = 2;
+    public final int LAYOUT_MISSION = 3;
+    public final int LAYOUT_SHIP = 4;
+
+
+
     private final int LAYOUT_ITEM_TITlE = 0;
     private final int LAYOUT_ITEM_LIST = 1;
-    private static int type = 0;
+
+    private static int MAIN_TYPE;
 
     //Constructor
-    public DrawerAdapter(Context context) {
+    public DrawerAdapter(Context context, int theType) {
         inflater = LayoutInflater.from(context);
+        MAIN_TYPE = theType;
     }
 
     //Choose type
-    public void setType(int yourType){
-        this.type = yourType;
-    }
+    public void setMainType(int yourType){ this.MAIN_TYPE = yourType;}
 
     //Get the type you choose
-    public int getType(){
-        return type;
-    }
+    public int getMainType(){ return MAIN_TYPE;}
 
     //The interface for OnItemClick
     public interface OnItemClickListener {
@@ -56,7 +63,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
     //Decided the ViewType that which is the title and list
     @Override
     public int getItemViewType(int position) {
-        if(shipTitle.indexOf(shipData.get(position)) >= 0)
+        if(title.indexOf(data.get(position)) >= 0)
             return LAYOUT_ITEM_TITlE;
         else
             return LAYOUT_ITEM_LIST;
@@ -65,7 +72,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
 
     @Override
     public int getItemCount(){
-        return shipData.size();
+        return data.size();
     }
 
     @Override
@@ -73,12 +80,35 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
     {
         DrawerViewHolder holder;
         //According the viewType to inflate the layout
-        if(viewType == LAYOUT_ITEM_TITlE) {
-             holder = new DrawerViewHolder(inflater
-                    .inflate(R.layout.ship_map_item, parent, false), viewType);
-        }
-        else{
-             holder = new DrawerViewHolder(inflater.inflate(R.layout.ship_map_item_list,parent,false), viewType);
+        switch(MAIN_TYPE) {
+            case LAYOUT_SHIP: {
+                if (viewType == LAYOUT_ITEM_TITlE) {
+                    holder = new DrawerViewHolder(inflater
+                            .inflate(R.layout.ship_map_item, parent, false), viewType);
+                } else {
+                    holder = new DrawerViewHolder(inflater.inflate(R.layout.ship_map_item_list, parent, false), viewType);
+                }
+            }
+            case LAYOUT_ATTACK:{
+                //TODO:get the Attack layout
+            }
+            case LAYOUT_EQUIPMENT:{
+                //TODO:get the Equipment layout
+            }
+            case LAYOUT_EXPEDITION:{
+                //TODO:get the Expedition layout
+            }
+            case LAYOUT_MISSION:{
+                //TODO:get the Mission layout
+            }
+            default:{
+                if (viewType == LAYOUT_ITEM_TITlE) {
+                    holder = new DrawerViewHolder(inflater
+                            .inflate(R.layout.ship_map_item, parent, false), viewType);
+                } else {
+                    holder = new DrawerViewHolder(inflater.inflate(R.layout.ship_map_item_list, parent, false), viewType);
+                }
+            }
         }
         return holder;
     }
@@ -89,11 +119,11 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
         switch (getItemViewType(position)){
             case LAYOUT_ITEM_LIST:
                 DrawerViewHolder holder1 = (DrawerViewHolder) holder;
-                holder1.shipItem.setText(shipData.get(position));
+                holder1.shipItem.setText(data.get(position));
                 break;
             case LAYOUT_ITEM_TITlE:
                 DrawerViewHolder holder2 = (DrawerViewHolder) holder;
-                holder2.shipItem.setText(shipData.get(position));
+                holder2.shipItem.setText(data.get(position));
                 break;
         }
 
@@ -127,44 +157,36 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
     }
 
     protected void iniData_Title(String[] shipName){
-        shipData = new ArrayList<String>();
-        shipTitle = new ArrayList<String>();
+        data = new ArrayList<String>();
+        title = new ArrayList<String>();
         typeState = new ArrayList<Boolean>();
         for(String sn: shipName){
-            shipData.add(sn);
-            shipTitle.add(sn);
+            data.add(sn);
+            title.add(sn);
         }
         //initiate the typeState
-        for(int i = 0; i < shipTitle.size(); i++){
+        for(int i = 0; i < title.size(); i++){
             Boolean state = new Boolean(CLOSE);
             typeState.add(state);
         }
     }
 
     public void addItem(String content, int position) {
-        shipData.add(position, content);
+        data.add(position, content);
         notifyItemInserted(position); //Attention!
-        notifyItemRangeChanged(position, shipData.size());//Here it refresh the position
+        notifyItemRangeChanged(position, data.size());//Here it refresh the position
     }
 
     public void removeItem(String model) {
-        int position = shipData.indexOf(model);
-        shipData.remove(position);
+        int position = data.indexOf(model);
+        data.remove(position);
         notifyItemRemoved(position);//Attention!
-        notifyItemRangeChanged(position, shipData.size());//Here it refresh the position
+        notifyItemRangeChanged(position, data.size());//Here it refresh the position
     }
 
     public void removeAllItem(String[] data){
         for(String temp: data) {
             removeItem(temp);
-        }
-    }
-
-    //add new String array from the first position
-    public void addAllItem(String[] data){
-        for(int position = 0; position < data.length; position++) {
-            setType(LAYOUT_ITEM_LIST);
-            addItem(data[position], shipData.size());
         }
     }
 
@@ -178,15 +200,15 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
     public List<Boolean> getTypeState(){return typeState;}
 
     public List<String> getShipData(){
-        return shipData;
+        return data;
     }
 
     public List<String> getShipTitle(){
-        return shipTitle;
+        return title;
     }
 
     public void itemViewChoose(int position, List<String[]> allShipName) {
-        int itemChoose = shipTitle.indexOf(shipData.get(position));
+        int itemChoose = title.indexOf(data.get(position));
         if(itemChoose >= 0) {
             if(typeState.get(itemChoose).booleanValue()) {
                 removeAllItem(allShipName.get(itemChoose));

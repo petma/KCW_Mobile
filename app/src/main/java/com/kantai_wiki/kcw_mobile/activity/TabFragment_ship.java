@@ -90,7 +90,7 @@ public  class TabFragment_ship extends Fragment {
         stickTitle.setVisibility(View.GONE);
         stickTitle_text = (TextView) v.findViewById(R.id.ship_map_list_Sticktitle_text);
         //DrawerAdapter
-        shipAdapter = new DrawerAdapter(getActivity());
+        shipAdapter = new DrawerAdapter(getActivity(),shipAdapter.LAYOUT_SHIP);
         shipAdapter.iniData_Title(shipType);
         shipLM = new LinearLayoutManager(getActivity());
         shipRecyclerView = (RecyclerView) v.findViewById(R.id.ship_map_list);
