@@ -81,11 +81,10 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
     @Override
     public DrawerViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
-        DrawerViewHolder holder;
+        DrawerViewHolder holder = null;
         //According the viewType to inflate the layout
         switch(MAIN_TYPE) {
             case LAYOUT_SHIP: {
-
                 if (viewType == LAYOUT_ITEM_TITlE) {
                     holder = new DrawerViewHolder(inflater
                             .inflate(R.layout.ship_map_item, parent, false), viewType);
@@ -107,12 +106,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
                 //TODO:get the Mission layout
             }
             default:{
-                if (viewType == LAYOUT_ITEM_TITlE) {
-                    holder = new DrawerViewHolder(inflater
-                            .inflate(R.layout.ship_map_item, parent, false), viewType);
-                } else {
-                    holder = new DrawerViewHolder(inflater.inflate(R.layout.ship_map_item_list, parent, false), viewType);
-                }
+               //TODO:throw a error expection
             }
         }
         return holder;
@@ -169,8 +163,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
         }
         //initiate the typeState
         for(int i = 0; i < title.size(); i++){
-            Boolean state = CLOSE;
-            typeState.add(state);
+            typeState.add(CLOSE);
         }
     }
 
