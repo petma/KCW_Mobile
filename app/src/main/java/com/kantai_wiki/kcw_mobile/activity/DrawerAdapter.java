@@ -13,7 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by admin on 2015/8/26.
+ * Created by Wafer on 2015/8/26.
+ *
  */
 public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerViewHolder> {
 
@@ -25,11 +26,13 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
     private final boolean CLOSE = false;
     private final boolean OPEN = true;
 
-    public final int LAYOUT_ATTACK = 0;
-    public final int LAYOUT_EQUIPMENT = 1;
-    public final int LAYOUT_EXPEDITION = 2;
-    public final int LAYOUT_MISSION = 3;
-    public final int LAYOUT_SHIP = 4;
+
+    // PUBLIC CONSTANT
+    public static final int LAYOUT_ATTACK = 0;
+    public static final int LAYOUT_EQUIPMENT = 1;
+    public static final int LAYOUT_EXPEDITION = 2;
+    public static final int LAYOUT_MISSION = 3;
+    public static final int LAYOUT_SHIP = 4;
 
 
 
@@ -45,7 +48,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
     }
 
     //Choose type
-    public void setMainType(int yourType){ this.MAIN_TYPE = yourType;}
+    public void setMainType(int yourType){ MAIN_TYPE = yourType;}
 
     //Get the type you choose
     public int getMainType(){ return MAIN_TYPE;}
@@ -82,6 +85,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
         //According the viewType to inflate the layout
         switch(MAIN_TYPE) {
             case LAYOUT_SHIP: {
+
                 if (viewType == LAYOUT_ITEM_TITlE) {
                     holder = new DrawerViewHolder(inflater
                             .inflate(R.layout.ship_map_item, parent, false), viewType);
@@ -89,6 +93,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
                     holder = new DrawerViewHolder(inflater.inflate(R.layout.ship_map_item_list, parent, false), viewType);
                 }
             }
+
             case LAYOUT_ATTACK:{
                 //TODO:get the Attack layout
             }
@@ -118,12 +123,10 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
         //According the vieType to set ViewHolder
         switch (getItemViewType(position)){
             case LAYOUT_ITEM_LIST:
-                DrawerViewHolder holder1 = (DrawerViewHolder) holder;
-                holder1.shipItem.setText(data.get(position));
+                holder.shipItem.setText(data.get(position));
                 break;
             case LAYOUT_ITEM_TITlE:
-                DrawerViewHolder holder2 = (DrawerViewHolder) holder;
-                holder2.shipItem.setText(data.get(position));
+                holder.shipItem.setText(data.get(position));
                 break;
         }
 
@@ -157,16 +160,16 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
     }
 
     protected void iniData_Title(String[] shipName){
-        data = new ArrayList<String>();
-        title = new ArrayList<String>();
-        typeState = new ArrayList<Boolean>();
+        data = new ArrayList<>();
+        title = new ArrayList<>();
+        typeState = new ArrayList<>();
         for(String sn: shipName){
             data.add(sn);
             title.add(sn);
         }
         //initiate the typeState
         for(int i = 0; i < title.size(); i++){
-            Boolean state = new Boolean(CLOSE);
+            Boolean state = CLOSE;
             typeState.add(state);
         }
     }
@@ -210,13 +213,13 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
     public void itemViewChoose(int position, List<String[]> allShipName) {
         int itemChoose = title.indexOf(data.get(position));
         if(itemChoose >= 0) {
-            if(typeState.get(itemChoose).booleanValue()) {
+            if(typeState.get(itemChoose)) {
                 removeAllItem(allShipName.get(itemChoose));
-                typeState.set(itemChoose, new Boolean(CLOSE));
+                typeState.set(itemChoose, CLOSE);
             }
             else{
                 addAllItem(allShipName.get(itemChoose), position);
-                typeState.set(itemChoose,new Boolean(OPEN));
+                typeState.set(itemChoose, OPEN);
             }
         }
         else{
